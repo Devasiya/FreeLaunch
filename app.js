@@ -20,7 +20,7 @@ const User = require("./models/user.js");
 const authRoutes = require("./routes/authRoutes.js");
 
 // Connect to MongoDB
-const dbUrl = process.env.MONGO_URL || "mongodb:127.0.0.1:27017/sureConnect";
+const dbUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/sureConnect";
 mongoose.connect(dbUrl)
     .then(() => console.log(" Connected to DB"))
     .catch(err => console.log("DB Connection Error:", err));
@@ -89,7 +89,7 @@ app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong!" } = err;
     res.status(statusCode);
     try {
-        res.render("error.ejs", { message });
+        res.render("error.ejs", { statusCode, message });
     } catch (e) {
         res.send(`<h1>${message}</h1>`); // Fallback if error.ejs is missing
     }
