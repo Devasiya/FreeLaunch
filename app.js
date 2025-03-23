@@ -15,15 +15,17 @@ const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const User = require("./models/user.js");
+const bcrypt = require("bcrypt");
 
+const Client = require("./models/client");
+const Freelancer = require("./models/freelancer");
 const authRoutes = require("./routes/authRoutes.js");
 
 // Connect to MongoDB
 const dbUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/sureConnect";
 mongoose.connect(dbUrl)
-    .then(() => console.log(" Connected to DB"))
-    .catch(err => console.log("DB Connection Error:", err));
+    .then(() => console.log("✅ Connected to DB"))
+    .catch(err => console.log("❌ DB Connection Error:", err));
 
 // View Engine & Middleware
 app.set("view engine", "ejs");
@@ -37,10 +39,10 @@ app.use(express.static(path.join(__dirname, "public")));
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto: { secret: process.env.SECRET },
-    touchAfter: 24 * 3600,  // Ensures session isn't saved too frequently
+    touchAfter: 24 * 3600, // Ensures session isn't saved too frequently
 });
 
-store.on("error", err => console.log(" Mongo Session Store Error:", err));
+store.on("error", err => console.log("❌ Mongo Session Store Error:", err));
 
 const sessionOptions = {
     store,
@@ -57,12 +59,40 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
-// Passport Authentication
+// ✅ Passport Authentication (Custom Strategy)
+passport.use(new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
+    try {
+        let user = await Client.findOne({ email });
+        if (!user) user = await Freelancer.findOne({ email });
+
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return done(null, false, { message: "Invalid email or password!" });
+        }
+
+        return done(null, user);
+    } catch (err) {
+        return done(err);
+    }
+}));
+
+passport.serializeUser((user, done) => {
+    if (!user) return done(new Error("User not found"));
+    done(null, { id: user._id, role: user.role });
+});
+
+passport.deserializeUser(async (data, done) => {
+    try {
+        let user = await Client.findById(data.id) || await Freelancer.findById(data.id);
+        if (!user) return done(new Error("User not found"));
+        done(null, user);
+    } catch (err) {
+        done(err);
+    }
+});
+
+
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 // Flash Messages & Global Middleware
 app.use((req, res, next) => {
@@ -74,15 +104,14 @@ app.use((req, res, next) => {
 
 // ✅ Register Routes BEFORE Error Handlers
 app.get("/", (req, res) => {
-    res.send("i am home page");
-})
+    res.send("🏠 Home Page");
+});
 app.use("/auth", authRoutes);
 
 // Catch-All Route for 404 Errors
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
 });
-
 
 // Global Error Handler with Fallback
 app.use((err, req, res, next) => {
@@ -95,8 +124,7 @@ app.use((err, req, res, next) => {
     }
 });
 
-
 // Start Server
 app.listen(8080, () => {
-    console.log(" Server running on port 8080");
+    console.log("🚀 Server running on port 8080");
 });
