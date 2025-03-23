@@ -1,17 +1,15 @@
 const express = require("express");
-const passport = require("passport");
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
 const Client = require("../models/client");
 const Freelancer = require("../models/freelancer");
-const { validateSignup, clientSchema, freelancerSchema, loginSchema } = require("../middlewares/validation");
-const { isAuthenticated } = require("../middlewares/authMiddlewares");
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
 // ⬇️ GET: Client Registration Page
 router.get("/register/client", (req, res) => {
     res.render("clientRegister", {
+        title: "Client Registration",
         messages: {
             success: req.flash("success"),
             error: req.flash("error"),
@@ -20,158 +18,127 @@ router.get("/register/client", (req, res) => {
 });
 
 // ⬇️ POST: Register Client
-router.post("/register/client", validateSignup(clientSchema), async (req, res) => {
-    console.log("🔹 Client Registration Route Hit!"); // Debugging log
-    console.log("Received Data:", req.body);
-});
-
-// router.post("/register/client", validateSignup(clientSchema), async (req, res) => {
-//     const session = await User.startSession();
-//     session.startTransaction();
-
-//     try {
-//         console.log("🔹 Received Request Body:", req.body);
-
-//         const { email, password, username, ...otherDetails } = req.body;
-
-//         // Check if user already exists
-//         const existingUser = await User.findOne({ email }).session(session);
-//         if (existingUser) {
-//             req.flash("error", "Email is already registered!");
-//             await session.abortTransaction();
-//             session.endSession();
-//             return res.redirect("/register/client");
-//         }
-
-//         console.log("✅ Creating User...");
-//         const user = new User({ username, email, role: "client" });
-//         await User.register(user, password); // Hashes password
-//         await user.save({ session });
-
-//         console.log("✅ Creating Client...");
-//         const client = new Client({ email, username, ...otherDetails });
-//         await client.save({ session });
-
-//         console.log("✅ Linking Client to User...");
-//         user.client = client._id;
-//         await user.save({ session });
-
-//         await session.commitTransaction();
-//         session.endSession();
-
-//         req.flash("success", "Client registered successfully!");
-//         res.redirect("/login");
-//     } catch (err) {
-//         await session.abortTransaction();
-//         session.endSession();
-
-//         console.error("❌ Error Registering Client:", err);
-//         req.flash("error", err.message);
-//         res.redirect("/register/client");
-//     }
-// });
-
-// ⬇️ GET: Freelancer Registration Page
-router.get("/register/freelancer", (req, res) => {
-    res.render("freelancerRegister", { success: req.flash("success"), error: req.flash("error") });
-});
-
-// ⬇️ POST: Register Freelancer
-router.post("/register/freelancer", validateSignup(freelancerSchema), async (req, res) => {
-    const session = await User.startSession();
-    session.startTransaction();
-
+router.post("/register/client", async (req, res) => {
     try {
         console.log("🔹 Received Request Body:", req.body);
 
-        const { email, password, username, ...otherDetails } = req.body;
+        const { email, password, ...otherDetails } = req.body;
+        const existingClient = await Client.findOne({ email });
 
-        // Check if user already exists
-        const existingUser = await User.findOne({ email }).session(session);
-        if (existingUser) {
+        if (existingClient) {
             req.flash("error", "Email is already registered!");
-            await session.abortTransaction();
-            session.endSession();
-            return res.redirect("/register/freelancer");
+            return res.redirect("/auth/register/client");
         }
 
-        console.log("✅ Creating User...");
-        const user = new User({ username, email, role: "freelancer" });
-        await User.register(user, password); // Hashes password
-        await user.save({ session });
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const client = new Client({ ...otherDetails, email, password: hashedPassword });
 
-        console.log("✅ Creating Freelancer...");
-        const freelancer = new Freelancer({ email, username, ...otherDetails });
-        await freelancer.save({ session });
+        await client.save();
 
-        console.log("✅ Linking Freelancer to User...");
-        user.freelancer = freelancer._id;
-        await user.save({ session });
+        req.flash("success", "Client registered successfully!");
+        res.redirect("/auth/login");
+    } catch (err) {
+        console.error("❌ Error Registering Client:", err);
+        req.flash("error", "Something went wrong!");
+        res.redirect("/auth/register/client");
+    }
+});
 
-        await session.commitTransaction();
-        session.endSession();
+// ⬇️ GET: Freelancer Registration Page
+router.get("/register/freelancer", (req, res) => {
+    res.render("freelancerRegister", {
+        title: "Freelancer Registration",
+        messages: {
+            success: req.flash("success"),
+            error: req.flash("error"),
+        },
+    });
+});
+
+// ⬇️ POST: Register Freelancer
+router.post("/register/freelancer", async (req, res) => {
+    try {
+        console.log("🔹 Received Request Body:", req.body);
+
+        const { email, password, ...otherDetails } = req.body;
+        const existingFreelancer = await Freelancer.findOne({ email });
+
+        if (existingFreelancer) {
+            req.flash("error", "Email is already registered!");
+            return res.redirect("/auth/register/freelancer");
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const freelancer = new Freelancer({ ...otherDetails, email, password: hashedPassword });
+
+        await freelancer.save();
 
         req.flash("success", "Freelancer registered successfully!");
-        res.redirect("/login");
+        res.redirect("/auth/login");
     } catch (err) {
-        await session.abortTransaction();
-        session.endSession();
-
         console.error("❌ Error Registering Freelancer:", err);
-        req.flash("error", err.message);
-        res.redirect("/register/freelancer");
+        req.flash("error", "Something went wrong!");
+        res.redirect("/auth/register/freelancer");
     }
 });
 
 // ⬇️ GET: Login Page
 router.get("/login", (req, res) => {
-    res.render("login", { success: req.flash("success"), error: req.flash("error") });
+    res.render("login", {
+        title: "Login",
+        messages: {
+            success: req.flash("success"),
+            error: req.flash("error"),
+        },
+    });
 });
 
-router.post("/login", validateSignup(loginSchema), async (req, res) => {
+// ⬇️ POST: Login
+router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
+        let user = await Client.findOne({ email }) || await Freelancer.findOne({ email });
 
-        // Find user by email
-        const user = await User.findOne({ email });
         if (!user) {
             req.flash("error", "Invalid email or password!");
-            return res.redirect("/login");
+            return res.redirect("/auth/login");
         }
 
-        // Verify password (if using passport-local-mongoose)
-        const isMatch = await user.authenticate(password);
+        if (!user.password) {
+            req.flash("error", "Password is missing for this user.");
+            return res.redirect("/auth/login");
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             req.flash("error", "Invalid email or password!");
-            return res.redirect("/login");
+            return res.redirect("/auth/login");
         }
 
         // Generate JWT Token
-        const token = jwt.sign(
-            { id: user._id, role: user.role },
-            process.env.JWT_SECRET,
-            { expiresIn: "1h" }
-        );
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-        // Store JWT in session or send to frontend
-        req.session.token = token; // If using sessions
-
+        req.session.token = token;
         req.flash("success", "Login successful!");
-        res.redirect("/dashboard"); // Redirect to dashboard or homepage
-
+        res.redirect("/");
     } catch (err) {
         console.error("❌ Login Error:", err);
         req.flash("error", "Something went wrong!");
-        res.redirect("/login");
+        res.redirect("/auth/login");
     }
 });
 
 // ⬇️ GET: Logout User
 router.get("/logout", (req, res) => {
-    req.session.token = null; // Remove token if using sessions
-    req.flash("success", "Logged out successfully!");
-    res.redirect("/login");
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("❌ Logout Error:", err);
+            req.flash("error", "Could not log out, please try again.");
+        } else {
+            req.flash("success", "Logged out successfully!");
+        }
+        res.redirect("/auth/login");
+    });
 });
-
 
 module.exports = router;

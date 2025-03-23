@@ -8,6 +8,7 @@ const clientSchema = new mongoose.Schema({
     companyName: { type: String },
     profilePhoto: { type: String }, // Image URL
     email: { type: String, unique: true, required: true },
+    password: { type: String, required: true },
     location: {
         city: { type: String },
         state: { type: String },

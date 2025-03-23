@@ -1,58 +1,14 @@
-<%- include("layouts/header") %>
-
-    <div class="container mt-4">
-        <h2>Client Registration</h2>
-
-        <!-- Display Error Messages -->
-        <% if (messages.error && messages.error.length> 0) { %>
-            <div class="alert alert-danger">
-                <% messages.error.forEach(function(msg) { %>
-                    <p>
-                        <%= msg %>
-                    </p>
-                    <% }) %>
-            </div>
-            <% } %>
-
-                <!-- Display Success Messages -->
-                <% if (messages.success && messages.success.length> 0) { %>
-                    <div class="alert alert-success">
-                        <% messages.success.forEach(function(msg) { %>
-                            <p>
-                                <%= msg %>
-                            </p>
-                            <% }) %>
-                    </div>
-                    <% } %>
-
-                        <form action="/auth/register/client" method="POST">
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Register</button>
-                        </form>
-    </div>
-
-    <%- include("layouts/footer") %>
+<% layout('layout') %>
+    <h2>Register as a Client</h2>
+    <form action="/auth/register/client" method="POST">
+        <input type="text" name="firstName" placeholder="First Name">
+        <input type="text" name="lastName" placeholder="Last Name">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="text" name="companyName" placeholder="Company Name">
+        <input type="text" name="category" placeholder="Industry Category">
+        <textarea name="description" placeholder="Describe your company"></textarea>
+        <input type="text" name="phoneNumber" placeholder="Phone Number">
+        <button type="submit">Register</button>
+    </form>
