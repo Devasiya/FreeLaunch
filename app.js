@@ -47,14 +47,13 @@ const store = MongoStore.create({
 });
 
 store.on("error", err => console.log("❌ Mongo Session Store Error:", err));
-
 const sessionOptions = {
     store,
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // ✅ Corrected Date
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
     }
@@ -66,8 +65,7 @@ app.use(flash());
 // ✅ Passport Authentication (Custom Strategy)
 passport.use(new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
     try {
-        let user = await Client.findOne({ email });
-        if (!user) user = await Freelancer.findOne({ email });
+        let user = await Client.findOne({ email }) || await Freelancer.findOne({ email });
 
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return done(null, false, { message: "Invalid email or password!" });
@@ -79,22 +77,31 @@ passport.use(new LocalStrategy({ usernameField: "email" }, async (email, passwor
     }
 }));
 
+// ✅ Serialize User (Only Store `user._id`)
 passport.serializeUser((user, done) => {
-    if (!user) return done(new Error("User not found"));
-    done(null, { id: user._id, role: user.role });
+    console.log("✅ Serializing User:", user);
+    done(null, user._id.toString()); // ✅ Ensure it's stored as a string
 });
 
-passport.deserializeUser(async (data, done) => {
-    try {
-        let user = await Client.findById(data.id) || await Freelancer.findById(data.id);
-        if (!user) return done(null, false); // ✅ Return `false` instead of an error
 
+// ✅ Deserialize User (Retrieve Full User Object)
+passport.deserializeUser(async (id, done) => {
+    console.log("🔹 Deserializing User ID:", id);
+    try {
+        let user = await Client.findById(id) || await Freelancer.findById(id);
+
+        if (!user) {
+            console.log("❌ User Not Found in DB");
+            return done(null, false);
+        }
+
+        console.log("✅ Deserialized User:", user);
         done(null, user);
     } catch (err) {
-        done(err, false); // ✅ Ensure session doesn't break if an error occurs
+        console.error("❌ Error in Deserialization:", err);
+        done(err, false);
     }
 });
-
 
 app.use(passport.initialize());
 app.use(passport.session());

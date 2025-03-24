@@ -52,16 +52,10 @@ router.get("/:id/edit", async (req, res) => {
 });
 
 //full update
-router.put("/:id", isAuthenticated, async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const clientId = req.params.id;
-        const loggedInUserId = req.user._id; // Assuming user ID is stored in req.user after authentication
 
-        // Check if the logged-in user is the same client who owns this profile
-        if (clientId !== loggedInUserId.toString()) {
-            req.flash("error", "Unauthorized access!");
-            return res.redirect("/api/clients");
-        }
 
         const {
             firstName, lastName, username, companyName, profilePhoto, email, password,

@@ -3,22 +3,20 @@ const ExpressError = require("../utils/ExpressError");
 const User = require("../models/user"); // Import user model
 
 async function isAuthenticated(req, res, next) {
-    try {
-        console.log("🔹 Checking authentication:", req.user); // Debug log
+    console.log("🔹 Session Data:", req.session); // Debugging session
+    console.log("🔹 Checking authentication, req.user:", req.user); // Debug req.user
 
-        if (!req.isAuthenticated() || !req.user) { // Ensures `req.user` is not null
-            req.session.returnTo = req.originalUrl;
-            req.flash("error", "You must be logged in to access this page.");
-            return res.redirect("/auth/login");
-        }
-
-        next();
-    } catch (err) {
-        console.error("❌ Authentication Error:", err);
-        req.flash("error", "An error occurred.");
-        res.redirect("/auth/login");
+    if (!req.isAuthenticated() || !req.user) { // Ensure `req.user` is not null
+        console.log("❌ User not authenticated. Redirecting to login.");
+        req.session.returnTo = req.originalUrl; // Store return URL
+        req.flash("error", "You must be logged in.");
+        return res.redirect("/auth/login");
     }
+
+    console.log("✅ User Authenticated:", req.user);
+    next();
 }
+
 
 /**
  * Middleware to check if the user is a client
