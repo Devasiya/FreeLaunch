@@ -20,6 +20,7 @@ const bcrypt = require("bcrypt");
 const Client = require("./models/client");
 const Freelancer = require("./models/freelancer");
 const authRoutes = require("./routes/authRoutes.js");
+const clientRoutes = require("./routes/clientRoutes.js");
 
 // Connect to MongoDB
 const dbUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/sureConnect";
@@ -106,7 +107,10 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
     res.send("🏠 Home Page");
 });
+
+//ROUTES
 app.use("/auth", authRoutes);
+app.use("/api/clients", clientRoutes);
 
 // Catch-All Route for 404 Errors
 app.all("*", (req, res, next) => {
