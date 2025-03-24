@@ -17,6 +17,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
 
+
+
 const Client = require("./models/client");
 const Freelancer = require("./models/freelancer");
 const authRoutes = require("./routes/authRoutes.js");
@@ -35,6 +37,7 @@ app.engine("ejs", ejsMate);
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(methodOverride("_method"));
 
 // Session Store (MongoDB)
 const store = MongoStore.create({
@@ -84,10 +87,11 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (data, done) => {
     try {
         let user = await Client.findById(data.id) || await Freelancer.findById(data.id);
-        if (!user) return done(new Error("User not found"));
+        if (!user) return done(null, false); // ✅ Return `false` instead of an error
+
         done(null, user);
     } catch (err) {
-        done(err);
+        done(err, false); // ✅ Ensure session doesn't break if an error occurs
     }
 });
 
@@ -105,7 +109,7 @@ app.use((req, res, next) => {
 
 // ✅ Register Routes BEFORE Error Handlers
 app.get("/", (req, res) => {
-    res.send("🏠 Home Page");
+    res.render("home", { currUser: req.user });
 });
 
 //ROUTES

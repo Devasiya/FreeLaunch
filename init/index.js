@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const Client = require("../models/user"); // Import Client model
-const clientData = require("./user"); // Import client data
+const Client = require("../models/transaction.js"); // Import Client model
+const clientData = require("./transactionData.js"); // Import client data
 
 async function insertClientData() {
     try {

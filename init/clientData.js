@@ -6,6 +6,7 @@ data = [
         "companyName": "TechCorp",
         "profilePhoto": "https://example.com/photos/john.jpg",
         "email": "john.doe@example.com",
+        "password": "John123!",
         "location": {
             "city": "San Francisco",
             "state": "California",
@@ -30,6 +31,7 @@ data = [
         "companyName": "InnoSoft",
         "profilePhoto": "https://example.com/photos/aarav.jpg",
         "email": "aarav.sharma@example.com",
+        "password": "Aarav@789",
         "location": {
             "city": "Bengaluru",
             "state": "Karnataka",
@@ -54,6 +56,7 @@ data = [
         "companyName": "Verma Enterprises",
         "profilePhoto": "https://example.com/photos/priya.jpg",
         "email": "priya.verma@example.com",
+        "password": "Priya@456",
         "location": {
             "city": "Mumbai",
             "state": "Maharashtra",
@@ -70,174 +73,7 @@ data = [
         "linkedInLink": "https://linkedin.com/in/priya-verma",
         "transactionHistory": [],
         "agreements": []
-    },
-    {
-        "firstName": "David",
-        "lastName": "Smith",
-        "username": "dave_smith",
-        "companyName": "Smith Consulting",
-        "profilePhoto": "https://example.com/photos/david.jpg",
-        "email": "david.smith@example.com",
-        "location": {
-            "city": "New York",
-            "state": "New York",
-            "country": "USA",
-            "pincode": "10001"
-        },
-        "category": "Mobile App Development",
-        "description": "Building innovative mobile applications for Android and iOS.",
-        "credits": 180,
-        "projects": [],
-        "reviews": [],
-        "phoneNumber": "+1-1234567890",
-        "instagramLink": "https://instagram.com/dave_smith",
-        "linkedInLink": "https://linkedin.com/in/dave-smith",
-        "transactionHistory": [],
-        "agreements": []
-    },
-    {
-        "firstName": "Sneha",
-        "lastName": "Rao",
-        "username": "sneha_r",
-        "companyName": "DataGenix",
-        "profilePhoto": "https://example.com/photos/sneha.jpg",
-        "email": "sneha.rao@example.com",
-        "location": {
-            "city": "Hyderabad",
-            "state": "Telangana",
-            "country": "India",
-            "pincode": "500001"
-        },
-        "category": "Data Science",
-        "description": "Passionate data scientist with expertise in machine learning models.",
-        "credits": 250,
-        "projects": [],
-        "reviews": [],
-        "phoneNumber": "+91-9876549876",
-        "instagramLink": "https://instagram.com/sneha_r",
-        "linkedInLink": "https://linkedin.com/in/sneha-rao",
-        "transactionHistory": [],
-        "agreements": []
-    },
-    {
-        "firstName": "Michael",
-        "lastName": "Clark",
-        "username": "mike_clark",
-        "companyName": "CloudOps",
-        "profilePhoto": "https://example.com/photos/mike.jpg",
-        "email": "michael.clark@example.com",
-        "location": {
-            "city": "Seattle",
-            "state": "Washington",
-            "country": "USA",
-            "pincode": "98101"
-        },
-        "category": "Cloud Computing",
-        "description": "Expert in AWS, Azure, and Google Cloud platforms.",
-        "credits": 400,
-        "projects": [],
-        "reviews": [],
-        "phoneNumber": "+1-8765432109",
-        "instagramLink": "https://instagram.com/mike_clark",
-        "linkedInLink": "https://linkedin.com/in/mike-clark",
-        "transactionHistory": [],
-        "agreements": []
-    },
-    {
-        "firstName": "Aisha",
-        "lastName": "Khan",
-        "username": "aisha_k",
-        "companyName": "SoftTech",
-        "profilePhoto": "https://example.com/photos/aisha.jpg",
-        "email": "aisha.khan@example.com",
-        "location": {
-            "city": "Chennai",
-            "state": "Tamil Nadu",
-            "country": "India",
-            "pincode": "600001"
-        },
-        "category": "Cybersecurity",
-        "description": "Specialist in cybersecurity and data protection.",
-        "credits": 220,
-        "projects": [],
-        "reviews": [],
-        "phoneNumber": "+91-9876512345",
-        "instagramLink": "https://instagram.com/aisha_k",
-        "linkedInLink": "https://linkedin.com/in/aisha-khan",
-        "transactionHistory": [],
-        "agreements": []
-    },
-    {
-        "firstName": "Rahul",
-        "lastName": "Mehta",
-        "username": "rahul_m",
-        "companyName": "FinTech Solutions",
-        "profilePhoto": "https://example.com/photos/rahul.jpg",
-        "email": "rahul.mehta@example.com",
-        "location": {
-            "city": "Pune",
-            "state": "Maharashtra",
-            "country": "India",
-            "pincode": "411001"
-        },
-        "category": "Finance & Accounting",
-        "description": "Expert in financial analysis and auditing.",
-        "credits": 300,
-        "projects": [],
-        "reviews": [],
-        "phoneNumber": "+91-8765432109",
-        "instagramLink": "https://instagram.com/rahul_m",
-        "linkedInLink": "https://linkedin.com/in/rahul-mehta",
-        "transactionHistory": [],
-        "agreements": []
-    },
-    {
-        "firstName": "Emily",
-        "lastName": "Davis",
-        "username": "emily_d",
-        "companyName": "EduTech",
-        "profilePhoto": "https://example.com/photos/emily.jpg",
-        "email": "emily.davis@example.com",
-        "location": {
-            "city": "Boston",
-            "state": "Massachusetts",
-            "country": "USA",
-            "pincode": "02101"
-        },
-        "category": "EdTech",
-        "description": "Passionate about building educational platforms.",
-        "credits": 150,
-        "projects": [],
-        "reviews": [],
-        "phoneNumber": "+1-7654321098",
-        "instagramLink": "https://instagram.com/emily_d",
-        "linkedInLink": "https://linkedin.com/in/emily-davis",
-        "transactionHistory": [],
-        "agreements": []
-    },
-    {
-        "firstName": "Vikram",
-        "lastName": "Raj",
-        "username": "vikram_r",
-        "companyName": "AgriTech",
-        "profilePhoto": "https://example.com/photos/vikram.jpg",
-        "email": "vikram.raj@example.com",
-        "location": {
-            "city": "Delhi",
-            "state": "Delhi",
-            "country": "India",
-            "pincode": "110001"
-        },
-        "category": "Agritech",
-        "description": "Helping farmers with technology-driven solutions.",
-        "credits": 275,
-        "projects": [],
-        "reviews": [],
-        "phoneNumber": "+91-7654321098",
-        "instagramLink": "https://instagram.com/vikram_r",
-        "linkedInLink": "https://linkedin.com/in/vikram-raj",
-        "transactionHistory": [],
-        "agreements": []
     }
-]
+];
+
 module.exports = data;

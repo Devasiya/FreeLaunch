@@ -1,16 +1,24 @@
 const passport = require("passport");
 const ExpressError = require("../utils/ExpressError");
+const User = require("../models/user"); // Import user model
 
-/**
- * Middleware to check if a user is authenticated
- */
-const isAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next(); // User is logged in, proceed
+async function isAuthenticated(req, res, next) {
+    try {
+        console.log("🔹 Checking authentication:", req.user); // Debug log
+
+        if (!req.isAuthenticated() || !req.user) { // Ensures `req.user` is not null
+            req.session.returnTo = req.originalUrl;
+            req.flash("error", "You must be logged in to access this page.");
+            return res.redirect("/auth/login");
+        }
+
+        next();
+    } catch (err) {
+        console.error("❌ Authentication Error:", err);
+        req.flash("error", "An error occurred.");
+        res.redirect("/auth/login");
     }
-    req.flash("error", "You must be logged in first!");
-    res.redirect("/auth/login"); // Redirect to login page
-};
+}
 
 /**
  * Middleware to check if the user is a client

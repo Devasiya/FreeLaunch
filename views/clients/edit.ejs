@@ -1,0 +1,53 @@
+<div class="container mt-4">
+    <h1 class="text-center">Edit Client</h1>
+
+    <form action="/api/clients/<%= client._id %>?_method=PUT" method="POST">
+        <div class="form-group">
+            <label>First Name:</label>
+            <input type="text" name="firstName" class="form-control" value="<%= client.firstName || '' %>">
+        </div>
+
+        <div class="form-group">
+            <label>Last Name:</label>
+            <input type="text" name="lastName" class="form-control" value="<%= client.lastName || '' %>">
+        </div>
+
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" class="form-control" value="<%= client.email %>" required>
+        </div>
+
+        <div class="form-group">
+            <label>Company Name:</label>
+            <input type="text" name="companyName" class="form-control" value="<%= client.companyName || '' %>">
+        </div>
+
+        <div class="form-group">
+            <label>Category:</label>
+            <input type="text" name="category" class="form-control" value="<%= client.category || '' %>">
+        </div>
+
+        <div class="form-group">
+            <label>Description:</label>
+            <textarea name="description" class="form-control"><%= client.description || '' %></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number:</label>
+            <input type="text" name="phoneNumber" class="form-control" value="<%= client.phoneNumber || '' %>">
+        </div>
+
+        <div class="form-group">
+            <label>LinkedIn Link:</label>
+            <input type="url" name="linkedInLink" class="form-control" value="<%= client.linkedInLink || '' %>">
+        </div>
+
+        <div class="form-group">
+            <label>Instagram Link:</label>
+            <input type="url" name="instagramLink" class="form-control" value="<%= client.instagramLink || '' %>">
+        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
+        <a href="/api/clients/<%= client._id %>" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

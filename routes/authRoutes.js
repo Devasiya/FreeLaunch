@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const Client = require("../models/client");
 const Freelancer = require("../models/freelancer");
 const bcrypt = require("bcrypt");
-
+const passport = require("passport");
 const router = express.Router();
 
 // ⬇️ GET: Client Registration Page
@@ -94,51 +94,45 @@ router.get("/login", (req, res) => {
 });
 
 // ⬇️ POST: Login
-router.post("/login", async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        let user = await Client.findOne({ email }) || await Freelancer.findOne({ email });
-
+router.post("/login", (req, res, next) => {
+    passport.authenticate("local", (err, user, info) => {
+        if (err) return next(err);
         if (!user) {
-            req.flash("error", "Invalid email or password!");
+            req.flash("error", info.message || "Invalid email or password!");
             return res.redirect("/auth/login");
         }
 
-        if (!user.password) {
-            req.flash("error", "Password is missing for this user.");
-            return res.redirect("/auth/login");
-        }
+        req.logIn(user, (err) => {
+            if (err) return next(err);
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            req.flash("error", "Invalid email or password!");
-            return res.redirect("/auth/login");
-        }
+            console.log("✅ Logged in User:", req.user); // Debug: Check if req.user exists
+            console.log("✅ Session Before Save:", req.session); // Debug: Check session before saving
 
-        // Generate JWT Token
-        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+            req.flash("success", "Login successful!");
+            const redirectTo = req.session.returnTo || "/";
+            delete req.session.returnTo;
 
-        req.session.token = token;
-        req.flash("success", "Login successful!");
-        res.redirect("/");
-    } catch (err) {
-        console.error("❌ Login Error:", err);
-        req.flash("error", "Something went wrong!");
-        res.redirect("/auth/login");
-    }
+            req.session.save(() => {
+                console.log("✅ Session Saved! Redirecting to:", redirectTo); // Debug: Ensure session is saved
+                res.redirect(redirectTo);
+            });
+        });
+    })(req, res, next);
 });
 
 // ⬇️ GET: Logout User
 router.get("/logout", (req, res) => {
+    req.flash("success", "Logged out successfully!"); // ✅ Set flash message before destroying session
+
     req.session.destroy((err) => {
         if (err) {
             console.error("❌ Logout Error:", err);
-            req.flash("error", "Could not log out, please try again.");
-        } else {
-            req.flash("success", "Logged out successfully!");
+            return res.redirect("/"); // Redirect instead of crashing
         }
+
         res.redirect("/auth/login");
     });
 });
+
 
 module.exports = router;
