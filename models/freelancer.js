@@ -30,4 +30,4 @@ const freelancerSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 freelancerSchema.plugin(passportLocalMongoose, { usernameField: "email" });
-module.exports = mongoose.model("Freelancer", freelancerSchema);
+module.exports = mongoose.models.freelancer || mongoose.model("freelancer", freelancerSchema);

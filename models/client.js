@@ -27,5 +27,6 @@ const clientSchema = new mongoose.Schema({
     agreements: [{ type: mongoose.Schema.Types.ObjectId, ref: "Agreement" }]
 }, { timestamps: true });
 
+
 clientSchema.plugin(passportLocalMongoose, { usernameField: "email" });
-module.exports = mongoose.model("Client", clientSchema);
+module.exports = mongoose.models.client || mongoose.model("client", clientSchema);

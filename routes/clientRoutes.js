@@ -1,7 +1,8 @@
 const express = require("express");
 const Client = require("../models/client");
-const { isAuthenticated } = require("../middlewares/authMiddlewares");
-const Project = require("../models/projects");
+const { isLoggedIn, isOwner } = require("../middlewares/index.js"); // Import the middlewares
+// Assuming you're using the Client model
+
 
 const router = express.Router();
 
@@ -23,14 +24,14 @@ router.get("/:id", async (req, res) => {
 
         const client = await Client.findById(req.params.id);
         if (!client) {
-            console.log("❌ Client Not Found"); // Debugging
+            console.log(" Client Not Found"); // Debugging
             req.flash("error", "Client not found");
             return res.redirect("/api/clients");
         }
 
         res.render("clients/show", { client, title: `${client.firstName} ${client.lastName}` });
     } catch (err) {
-        console.error("❌ Error Fetching Client:", err);
+        console.error("Error Fetching Client:", err);
         req.flash("error", "Error fetching client details");
         res.redirect("/api/clients");
     }
@@ -51,11 +52,11 @@ router.get("/:id/edit", async (req, res) => {
     }
 });
 
-//full update
-router.put("/:id", async (req, res) => {
+
+// Route to update client details
+router.put("/:id", isLoggedIn, isOwner, async (req, res) => {
     try {
         const clientId = req.params.id;
-
 
         const {
             firstName, lastName, username, companyName, profilePhoto, email, password,
@@ -63,6 +64,7 @@ router.put("/:id", async (req, res) => {
             city, state, country, pincode
         } = req.body;
 
+        // Updating the client details
         const updatedClient = await Client.findByIdAndUpdate(
             clientId,
             {
@@ -73,11 +75,13 @@ router.put("/:id", async (req, res) => {
             { new: true, runValidators: true }
         );
 
+        // If client is not found, show an error message
         if (!updatedClient) {
             req.flash("error", "Client not found");
             return res.redirect("/api/clients");
         }
 
+        // Success message and redirect
         req.flash("success", "Client updated successfully");
         res.redirect(`/api/clients/${clientId}`);
     } catch (err) {
@@ -86,8 +90,6 @@ router.put("/:id", async (req, res) => {
         res.redirect("/api/clients");
     }
 });
-
-
 
 router.get("/:id/projects", async (req, res) => {
     try {
@@ -99,7 +101,7 @@ router.get("/:id/projects", async (req, res) => {
         // ✅ Pass client and client.projects correctly
         res.render("clients/projects", { client, projects: client.projects });
     } catch (err) {
-        console.error("❌ Error Fetching Projects:", err);
+        console.error("Error Fetching Projects:", err);
         req.flash("error", "Error fetching client projects");
         res.redirect("/api/clients");
     }

@@ -18,6 +18,7 @@ async function isAuthenticated(req, res, next) {
 }
 
 
+
 /**
  * Middleware to check if the user is a client
  */

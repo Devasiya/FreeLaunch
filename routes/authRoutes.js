@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const router = express.Router();
 
-// ⬇️ GET: Client Registration Page
+//  GET: Client Registration Page
 router.get("/register/client", (req, res) => {
     res.render("clientRegister", {
         title: "Client Registration",
@@ -17,7 +17,7 @@ router.get("/register/client", (req, res) => {
     });
 });
 
-// ⬇️ POST: Register Client
+// POST: Register Client
 router.post("/register/client", async (req, res) => {
     try {
         console.log("🔹 Received Request Body:", req.body);
@@ -38,13 +38,13 @@ router.post("/register/client", async (req, res) => {
         req.flash("success", "Client registered successfully!");
         res.redirect("/auth/login");
     } catch (err) {
-        console.error("❌ Error Registering Client:", err);
+        console.error(" Error Registering Client:", err);
         req.flash("error", "Something went wrong!");
         res.redirect("/auth/register/client");
     }
 });
 
-// ⬇️ GET: Freelancer Registration Page
+//  GET: Freelancer Registration Page
 router.get("/register/freelancer", (req, res) => {
     res.render("freelancerRegister", {
         title: "Freelancer Registration",
@@ -55,7 +55,7 @@ router.get("/register/freelancer", (req, res) => {
     });
 });
 
-// ⬇️ POST: Register Freelancer
+//  POST: Register Freelancer
 router.post("/register/freelancer", async (req, res) => {
     try {
         console.log("🔹 Received Request Body:", req.body);
@@ -76,13 +76,13 @@ router.post("/register/freelancer", async (req, res) => {
         req.flash("success", "Freelancer registered successfully!");
         res.redirect("/auth/login");
     } catch (err) {
-        console.error("❌ Error Registering Freelancer:", err);
+        console.error("Error Registering Freelancer:", err);
         req.flash("error", "Something went wrong!");
         res.redirect("/auth/register/freelancer");
     }
 });
 
-// ⬇️ GET: Login Page
+//  GET: Login Page
 router.get("/login", (req, res) => {
     res.render("login", {
         title: "Login",
@@ -93,7 +93,7 @@ router.get("/login", (req, res) => {
     });
 });
 
-// ⬇️ POST: Login
+// ⬇ POST: Login
 router.post("/login", (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
         if (err) return next(err);
@@ -105,28 +105,28 @@ router.post("/login", (req, res, next) => {
         req.logIn(user, (err) => {
             if (err) return next(err);
 
-            console.log("✅ Logged in User:", req.user); // Debug: Check if req.user exists
-            console.log("✅ Session Before Save:", req.session); // Debug: Check session before saving
+            console.log("Logged in User:", req.user); // Debug: Check if req.user exists
+            console.log("Session Before Save:", req.session); // Debug: Check session before saving
 
             req.flash("success", "Login successful!");
             const redirectTo = req.session.returnTo || "/";
             delete req.session.returnTo;
 
             req.session.save(() => {
-                console.log("✅ Session Saved! Redirecting to:", redirectTo); // Debug: Ensure session is saved
+                console.log("Session Saved! Redirecting to:", redirectTo); // Debug: Ensure session is saved
                 res.redirect(redirectTo);
             });
         });
     })(req, res, next);
 });
 
-// ⬇️ GET: Logout User
+//  GET: Logout User
 router.get("/logout", (req, res) => {
-    req.flash("success", "Logged out successfully!"); // ✅ Set flash message before destroying session
+    req.flash("success", "Logged out successfully!"); // Set flash message before destroying session
 
     req.session.destroy((err) => {
         if (err) {
-            console.error("❌ Logout Error:", err);
+            console.error("Logout Error:", err);
             return res.redirect("/"); // Redirect instead of crashing
         }
 
