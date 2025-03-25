@@ -53,7 +53,7 @@ router.get("/:id/edit", async (req, res) => {
 
 
 // Route to update client details
-router.put("/:id", isLoggedIn, async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const clientId = req.params.id;
 

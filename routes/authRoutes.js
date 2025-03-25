@@ -105,6 +105,9 @@ router.post("/login", (req, res, next) => {
         req.logIn(user, (err) => {
             if (err) return next(err);
 
+            req.session.userId = user._id; // Assuming user._id is the ID of the logged-in user
+            req.session.role = user.role; // Assuming user.role indicates if the user is a "Client" or "Freelancer"
+
             console.log("Logged in User:", req.user); // Debug: Check if req.user exists
             console.log("Session Before Save:", req.session); // Debug: Check session before saving
 

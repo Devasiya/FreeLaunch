@@ -59,6 +59,7 @@
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
             <a href="/api/freelancers/<%= freelancer._id %>/projects" class="btn btn-primary mt-3">View Projects</a>
+            <a href="/api/freelancers/<%= freelancer._id %>/reviews" class="btn btn-secondary btn-sm">See Reviews</a>
             <a href="/api/freelancers" class="btn btn-secondary">Back to Freelancers</a>
         </div>
     </div>
@@ -81,7 +82,7 @@
                 <% } %>
     </div>
 
-    <!-- Reviews Section -->
+    <!-- Reviews Section
     <div class="mt-4">
         <h3>Reviews</h3>
         <% if (freelancer.reviews.length===0) { %>
@@ -97,7 +98,7 @@
                         <% }) %>
                 </ul>
                 <% } %>
-    </div>
+    </div> -->
 
 </body>
 </html>
