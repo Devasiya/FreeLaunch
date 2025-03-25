@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= freelancer.firstName %>'s Projects
+    </title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center">
+            <%= freelancer.firstName %>'s Projects
+        </h1>
+
+        <!-- Flash Messages -->
+        <% if (error) { %>
+            <div class="alert alert-danger">
+                <%= error %>
+            </div>
+            <% } %>
+                <% if (success) { %>
+                    <div class="alert alert-success">
+                        <%= success %>
+                    </div>
+                    <% } %>
+
+                        <a href="/api/freelancers/<%= freelancer._id %>/projects/add" class="btn btn-primary mb-3">Add
+                            New Project</a>
+
+                        <% if (projects.length===0) { %>
+                            <p class="text-muted text-center">No projects found for this freelancer.</p>
+                            <% } else { %>
+                                <table class="table table-striped mt-3">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Budget</th>
+                                            <th>Deadline</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% projects.forEach(project=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%= project.title %>
+                                                </td>
+                                                <td>
+                                                    <%= project.description %>
+                                                </td>
+                                                <td>$<%= project.budget.toFixed(2) %>
+                                                </td>
+                                                <td>
+                                                    <%= new Date(project.deadline).toLocaleDateString() %>
+                                                </td>
+                                                <td>
+                                                    <%= project.status %>
+                                                </td>
+                                                <td>
+                                                    <a href="/api/freelancers/<%= freelancer._id %>/projects/<%= project._id %>/edit"
+                                                        class="btn btn-warning btn-sm">Edit</a>
+                                                    <form
+                                                        action="/api/freelancers/<%= freelancer._id %>/projects/<%= project._id %>?_method=DELETE"
+                                                        method="POST" style="display:inline;">
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                                <% } %>
+
+                                    <a href="/api/freelancers" class="btn btn-secondary mt-3">Back to Freelancers</a>
+    </div>
+</body>
+
+</html>

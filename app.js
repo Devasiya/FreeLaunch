@@ -26,6 +26,7 @@ const Project = require("./models/projects");
 // Routes
 const authRoutes = require("./routes/authRoutes.js");
 const clientRoutes = require("./routes/clientRoutes.js");
+const freelancerRoutes = require("./routes/freelancerRoutes.js");
 
 // Connect to MongoDB
 const dbUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/sureConnect";
@@ -62,7 +63,7 @@ const sessionOptions = {
     }
 };
 
-app.use(session(sessionOptions));
+// app.use(session(sessionOptions));
 app.use(flash());
 
 // Passport Authentication (Custom Strategy)
@@ -91,13 +92,20 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
     try {
-        const user = await User.findById(id);
+        let user = await Client.findById(id);
+        if (!user) {
+            user = await Freelancer.findById(id);
+        }
+        if (!user) {
+            return done(null, false);
+        }
         done(null, user);
     } catch (err) {
         done(err, null);
     }
 });
 
+app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -124,6 +132,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/auth", authRoutes);
 app.use("/api/clients", clientRoutes);
+app.use("/api/freelancers", freelancerRoutes);
 
 //  Catch-All Route for 404 Errors
 app.all("*", (req, res, next) => {

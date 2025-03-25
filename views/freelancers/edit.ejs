@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Freelancer</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>Edit Freelancer</h1>
+        <form action="/api/freelancers/<%= freelancer._id %>?_method=PUT" method="POST">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" class="form-control"
+                    value="<%= freelancer.firstName %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" value="<%= freelancer.lastName %>"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="form-control" value="<%= freelancer.username %>"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" value="<%= freelancer.email %>"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control"
+                    placeholder="Leave blank to keep current password">
+            </div>
+
+            <div class="form-group">
+                <label for="profilePhoto">Profile Photo URL:</label>
+                <input type="text" id="profilePhoto" name="profilePhoto" class="form-control"
+                    value="<%= freelancer.profilePhoto %>">
+            </div>
+
+            <h3>Location</h3>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" name="location[city]" class="form-control"
+                    value="<%= freelancer.location.city %>">
+            </div>
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" id="state" name="location[state]" class="form-control"
+                    value="<%= freelancer.location.state %>">
+            </div>
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="location[country]" class="form-control"
+                    value="<%= freelancer.location.country %>">
+            </div>
+            <div class="form-group">
+                <label for="pincode">Pincode:</label>
+                <input type="text" id="pincode" name="location[pincode]" class="form-control"
+                    value="<%= freelancer.location.pincode %>">
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Experience:</label>
+                <input type="text" id="experience" name="experience" class="form-control"
+                    value="<%= freelancer.experience %>">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description"
+                    class="form-control"><%= freelancer.description %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" class="form-control"
+                    value="<%= freelancer.phoneNumber %>">
+            </div>
+
+            <div class="form-group">
+                <label for="skills">Skills (comma separated):</label>
+                <input type="text" id="skills" name="skills" class="form-control"
+                    value="<%= freelancer.skills.join(', ') %>">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Freelancer</button>
+            <a href="/api/freelancers/<%= freelancer._id %>" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+
+</html>
