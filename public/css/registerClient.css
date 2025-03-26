@@ -1,0 +1,145 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1b1f32, #0e0f21);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    width: 1000px;
+    height: 600px;
+    background: #1f2235;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Left Section - Form */
+.form-section {
+    width: 55%;
+    padding: 50px;
+    background: #292c46;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    color: white;
+    overflow-y: auto;
+}
+
+/* Form Header */
+.form-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #00d9ff;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #b3b3b3;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1f2235;
+    color: white;
+    outline: none;
+}
+
+.form-group textarea {
+    height: 80px;
+    resize: none;
+}
+
+/* Location Inputs */
+.form-group input[type="text"] {
+    margin-top: 5px;
+}
+
+/* Terms & Conditions */
+.terms {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+.terms a {
+    color: #00d9ff;
+    text-decoration: none;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #00d9ff, #007aff);
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(90deg, #007aff, #00d9ff);
+}
+
+/* Right Section - Info */
+.info-section {
+    width: 45%;
+    padding: 50px;
+    background: #1b1f32;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: white;
+    text-align: center;
+}
+
+/* Info Section Header */
+.info-section h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+/* Info Paragraph */
+.info-section p {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-bottom: 20px;
+}
+
+/* Sign-In Button */
+.sign-in-btn {
+    background: #00d9ff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out;
+}
+
+.sign-in-btn:hover {
+    background: #007aff;
+}
+
+/* Illustration */
+.illustration {
+    width: 100%;
+    margin-top: 20px;
+}

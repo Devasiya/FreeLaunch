@@ -4,35 +4,505 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - SureConnect</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Abril Fatface' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Slabo 27px' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <title>Home</title>
 </head>
 
-<body>
+<body style="
+  height: 3000px;
+  background-color: white;">
 
-    <!-- Header -->
-    <header>
-        <nav>
-            <ul>
-                <% if (!currUser) { %>
-                    <li><a href="/auth/login">Login</a></li>
-                    <li><a href="/auth/register/client">Register as Client</a></li>
-                    <li><a href="/auth/register/freelancer">Register as Freelancer</a></li>
-                    <% } else { %>
-                        <li><a href="/auth/logout">Logout</a></li>
-                        <% } %>
-                            <li><a href="/api/clients">Clients Page</a></li>
-                            <li><a href="/api/freelancers">Freelancers Page</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- Main Content -->
-    <main>
-        <h1>Welcome to SureConnect</h1>
-        <p>Your one-stop freelancing platform connecting clients and freelancers.</p>
-    </main>
+    <div class="saying">
+        <div class="slogan">
+            Work Securely, Earn Freely
+        </div>
+        <div class="description">
+            <p>SureConnect makes it easy for clients and freelancers to connect directly—no middlemen, just smooth
+                collaboration. Every deal and work history is secured on blockchain for full transparency. Freelancers
+                get three months free before a small fee kicks in!</p>
+        </div>
+    </div>
 
+
+
+    <div class="category-heading">List of Categories</div>
+
+    <div class="button-container">
+        <div class="category-btn">
+            <div class="content">
+                <i class='bx bx-laptop'></i>
+                <buttton>Web Development</buttton>
+            </div>
+        </div>
+
+        <div class="category-btn">
+            <div class="content">
+                <i class='bx bxs-bot'></i>
+                <buttton>AI Services</buttton>
+            </div>
+        </div>
+
+
+        <div class="category-btn">
+            <i class='bx bx-edit'></i>
+            <buttton>Graphic Design</buttton>
+        </div>
+
+
+        <div class="category-btn">
+            <i class='bx bx-analyse'></i>
+            <buttton>Analysts</buttton>
+        </div>
+
+
+        <div class="category-btn">
+            <i class='bx bxs-pen'></i>
+            <buttton>Content Writing</buttton>
+        </div>
+
+
+        <div class="category-btn">
+            <i class='bx bx-camera'></i>
+            <buttton>Photography</buttton>
+        </div>
+
+
+        <div class="category-btn">
+            <i class='bx bxs-megaphone'></i>
+            <buttton>Marketing</buttton>
+        </div>
+
+
+        <div class="category-btn">
+            <i class='bx bx-windows'></i>
+            <buttton>Software Development</buttton>
+        </div>
+
+
+        <div class="category-btn">
+            <i class="bx bx-video-recording"></i>
+            <buttton>Video Editing</buttton>
+        </div>
+
+
+        <div class="category-btn">
+            <i class='bx bx-group'></i>
+            <buttton>Consulting</buttton>
+        </div>
+
+
+        <div class="category-btn">
+            <i class='bx bxs-music'></i>
+            <buttton>Music & Audio</buttton>
+        </div>
+
+
+        <div class="category-btn">
+            <i class='bx bxs-business'></i>
+            <buttton>Business</buttton>
+        </div>
+    </div>
+
+
+
+    <div class="sc-heading">
+        <p class="text-sc">Blueprints of Success</p>
+        <div class="parent1">
+            <div class="circle circle1-1">
+                <img class="img1-1" src="images/sc-1.1.jpg">
+            </div>
+            <div class="circle circle1-2">
+                <img class="img1-2" src="images/sc-1.2.jpg">
+            </div>
+            <div class="text-1">
+                <p class="t-1">
+                    Sarah, an e-commerce owner, hired Jake, a web developer, to revamp her website, resulting in a 40%
+                    sales increase within a month.
+                </p>
+            </div>
+        </div>
+
+        <div class="parent2">
+            <div class="circle circle2-1">
+                <img class="img2-1" src="images/sc-2.1.jpg">
+            </div>
+            <div class="circle circle2-2">
+                <img class="img1-1" src="images/sc-2.2.jpg">
+            </div>
+            <div class="text-2">
+                <p class="t-2">
+                    Mark, a startup founder, hired Priya to build an AI chatbot, automating 70% of queries and boosting
+                    satisfaction by 50%.
+                </p>
+            </div>
+        </div>
+
+        <div class="parent3">
+            <div class="circle circle3-1">
+                <img class="img3-1" src="images//sc-3.1.webp">
+            </div>
+            <div class="circle circle3-2">
+                <img class="img3-1" src="images/sc-3.2.webp">
+            </div>
+            <div class="text-3">
+                <p class="t-3">
+                    Emily, a fitness coach, teamed up with Alex for a health e-book, tripling her business growth.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="pro-heading">SureConnect Pro</div>
+    <div class="mainnn-content" id="mainnnContent">
+        <div class="carousel-container" id="carouselContainer">
+            <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class=""
+                        aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"
+                        class="active" aria-current="true"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"
+                        class=""></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"
+                        class=""></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5"
+                        class=""></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="5" aria-label="Slide 6"
+                        class=""></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="6" aria-label="Slide 7"
+                        class=""></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <img style="object-fit: cover;height: 100%;width: 100%;" src="images/cau-img-1.webp">
+                        <div class="container">
+                            <div class="carousel-caption text-start">
+                                <h1>Post a Job & Get Matched Instantly!</h1>
+                                <p class="opacity-75">Work Smarter, Hire Faster!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item active">
+                        <img style="object-fit: cover;" id=img2Car src="images/cau-img-2.avif">
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h1>Find Top Talent for Your Next Project!</h1>
+                                <p>No Limits, Just Opportunities</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img style="object-fit: cover; width: 100%;height:100%;" src="images/cau-img-3.avif">
+                        <div class="container">
+                            <div class="carousel-caption text-end">
+                                <h1>Hire Experts. Get Things Done.</h1>
+                                <p>Quality Work, On Demand</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img style="object-fit: cover; width: 100%;height:100%;" src="images/cau-img-4.jpg">
+                        <div class="container">
+                            <div class="carousel-caption text-end">
+                                <h1>Hire Experts. Get Things Done.</h1>
+                                <p>Quality Work, On Demand</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img style="object-fit: cover; width: 100%;height:100%;" src="images/cau-img-5.webp">
+                        <div class="container">
+                            <div class="carousel-caption text-end">
+                                <h1>Hire Experts. Get Things Done.</h1>
+                                <p>Quality Work, On Demand</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img style="object-fit: cover; width: 100%;height:100%;" src="images/cau-img-6.webp">
+                        <div class="container">
+                            <div class="carousel-caption text-end">
+                                <h1>Hire Experts. Get Things Done.</h1>
+                                <p>Quality Work, On Demand</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img style="object-fit: cover; width: 100%;height:100%;" src="images/cau-img-7.webp">
+                        <div class="container">
+                            <div class="carousel-caption text-end">
+                                <h1>Hire Experts. Get Things Done.</h1>
+                                <p>Quality Work, On Demand</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="quote-heading">Our Platform Moto</div>
+
+    <div class="quote">
+        <img class="quote-img" src="images/final-quote.png">
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Graphics & Design</a></li>
+                    <li><a href="#">Digital Marketing</a></li>
+                    <li><a href="#">Writing & Translation</a></li>
+                    <li><a href="#">Video & Animation</a></li>
+                    <li><a href="#">Music & Audio</a></li>
+                    <li><a href="#">Programming & Tech</a></li>
+                    <li><a href="#">AI Services</a></li>
+                    <li><a href="#">Consulting</a></li>
+                    <li><a href="#">Data</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="#">Personal Growth & Hobbies</a></li>
+                    <li><a href="#">Photography</a></li>
+                    <li><a href="#">Finance</a></li>
+                    <li><a href="#">End-to-End Projects</a></li>
+                    <li><a href="#">Service Catalog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>For Clients</h3>
+                <ul>
+                    <li><a href="#">How SureConnnect Works</a></li>
+                    <li><a href="#">Customer Success Stories</a></li>
+                    <li><a href="#">Trust & Safety</a></li>
+                    <li><a href="#">Quality Guide</a></li>
+                    <li><a href="#">SureConnect Learn</a></li>
+                    <li><a href="#">SureConnect Guides</a></li>
+                    <li><a href="#">SureConnect Answers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>For Freelancers</h3>
+                <ul>
+                    <li><a href="#">Become a SureConnect Freelancer</a></li>
+                    <li><a href="#">Become an Agency</a></li>
+                    <li><a href="#">Freelancer Equity Program</a></li>
+                    <li><a href="#">Kickstart</a></li>
+                    <li><a href="#">Community Hub</a></li>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">Events</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Business Solutions</h3>
+                <ul>
+                    <li><a href="#">SureConnect Pro</a></li>
+                    <li><a href="#">Project Management Service</a></li>
+                    <li><a href="#">ClearVoice </a></li>
+                    <li><a href="#">Working Not Working </a></li>
+                    <li><a href="#">AutoDS </a></li>
+                    <li><a href="#">SureConnect Logo Maker</a></li>
+                    <li><a href="#">Contact Sales</a></li>
+                    <li><a href="#">SureConnect Go</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About SureConnect</a></li>
+                    <li><a href="#">Help & Support</a></li>
+                    <li><a href="#">Social Impact</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Do not sell or share my personal information</a></li>
+                    <li><a href="#">Partnerships</a></li>
+                    <li><a href="#">Creator Network</a></li>
+                    <li><a href="#">Affiliates</a></li>
+                    <li><a href="#">Invite a Friend</a></li>
+                    <li><a href="#">Press & News</a></li>
+                    <li><a href="#">Investor Relations</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image"></span>
+                <img src="images/logo1.jpg" alt="logo" height=45px width="45px">
+                </span>
+
+                <div class="text header-text">
+                    <span class="name">SureConnect</span>
+
+                </div>
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                    <i class="bx bx-search-alt"></i>
+                    <input type="search" placeholder="Search....">
+                </li>
+                </ul class="menu-links">
+                <li class="nav-link">
+                    <a href="#">
+                        <img class="whiteicon" id="home-icon" src="images/home.jpg">
+                        <span class="text nav-text">Home</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#">
+                        <img class="whiteicon" id="noti-icon" src="images/noti.jpg">
+                        <span class="text nav-text">Notification</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#">
+                        <img class="whiteicon" id="updates-icon" src="images/updates.jpg">
+                        <span class="text nav-text">Updates</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#">
+                        <img class="whiteicon" id="clients-icon" src="images/client.jpg">
+                        <span class="text nav-text">Client</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#">
+                        <img class="whiteicon" id="freel-icon" src="images/freel.jpg">
+                        <span class="text nav-text">Freelancer</span>
+                    </a>
+                </li>
+
+
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bxs-wallet'></i>
+                        <span class="text nav-text">Wallets</span>
+                    </a>
+                </li>
+
+
+
+                <div class="bottom-content">
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-log-out'></i>
+                            <span class="text nav-text">Log-Out</span>
+                        </a>
+                    </li>
+
+                    <li class="mode">
+                        <div class="moon-sun">
+                            <i class='bx bxs-moon icon moon'></i>
+                            <i class='bx bx-sun icon sun'></i>
+                        </div>
+
+                        <span class="mode-text-text">Dark Mode</span>
+                        <div class="toggle-switch">
+                            <span class="switch"></span>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="car-container">
+        <div class="car">
+            <img class="image1" src="images/image1.jpg" alt="Slide 1">
+            <img class="image2" src="images/image2.jpeg" alt="Slide 2">
+            <img class="image3" src="images/image3.webp" alt="Slide 3">
+            <img class="image4" src="images/image4.jpg" alt="Slide 4">
+        </div>
+    </div>
+
+
+
+
+    <div class="header">
+        <div class="left-section">
+            <!-- <div id="hamburger">
+        <img class="hamburger-icon" src="images/hamburger.jpg" height="45" width="45">
+      </div> -->
+            <div id="logo-container">
+                <img src="images/logoFinal.jpg" alt="Logo" class="logo">
+                <span class="logo-text">SureConnect</span>
+            </div>
+            <div class="features">Features</div>
+            <div class="faqs">FAQs</div>
+            <div class="about-us">About Us</div>
+            <div class="contact">Contact</div>
+        </div>
+        <div class="middle-section"></div>
+        <div class="right-section">
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search...">
+                <button class="search-button">
+                    🔍
+                </button>
+            </div>
+
+            <div class="login">
+                <button class="login-btn"><a href="/auth/login">Login in</a></button>
+            </div>
+            <div class="dropdown">
+                <button class="signup-btn">Sign Up</button>
+                <div class="content">
+                    <a href="/auth/register/freelancer">As Freelancer</a>
+                    <a href="/auth/register/client">As Client</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

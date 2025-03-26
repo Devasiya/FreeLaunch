@@ -1,13 +1,104 @@
-<% layout('layout') %>
-    <h2>Register as a Freelancer</h2>
-    <form action="/auth/register/freelancer" method="POST">
-        <input type="text" name="firstName" placeholder="First Name">
-        <input type="text" name="lastName" placeholder="Last Name">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="text" name="skills" placeholder="Skills">
-        <textarea name="description" placeholder="Describe your work"></textarea>
-        <input type="text" name="phoneNumber" placeholder="Phone Number">
-        <button type="submit">Register</button>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Registration</title>
+    <link rel="stylesheet" href="/css/registerFreelancer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="form-section">
+            <h2>Sign Up as a Freelancer</h2>
+            <form action="/auth/register/freelancer" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> First Name *</label>
+                    <input type="text" name="firstName" placeholder="Enter your first name" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Last Name *</label>
+                    <input type="text" name="lastName" placeholder="Enter your last name" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-user-circle"></i> Username *</label>
+                    <input type="text" name="username" placeholder="Choose a username" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email *</label>
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password *</label>
+                    <input type="password" name="password" placeholder="Enter a secure password" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-camera"></i> Profile Photo</label>
+                    <input type="file" name="profilePhoto" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Phone Number</label>
+                    <input type="text" name="phoneNumber" placeholder="Enter phone number">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Location</label>
+                    <input type="text" name="location[city]" placeholder="City">
+                    <input type="text" name="location[state]" placeholder="State">
+                    <input type="text" name="location[country]" placeholder="Country">
+                    <input type="text" name="location[pincode]" placeholder="Pincode">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-briefcase"></i> Years of Experience</label>
+                    <input type="text" name="experience" placeholder="Enter years of experience">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-list"></i> Skills (comma-separated)</label>
+                    <input type="text" name="skills" placeholder="E.g., JavaScript, React, Node.js">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-align-left"></i> Description</label>
+                    <textarea name="description" placeholder="Describe your expertise"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fab fa-linkedin"></i> LinkedIn Profile</label>
+                    <input type="url" name="linkedInLink" placeholder="LinkedIn Profile URL">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fab fa-instagram"></i> Instagram Profile</label>
+                    <input type="url" name="instagramLink" placeholder="Instagram Profile URL">
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" required> I agree to the <a href="/terms">terms and conditions</a>.
+                </div>
+
+                <button type="submit" class="submit-btn">Sign Up</button>
+            </form>
+        </div>
+
+        <!-- Right Section -->
+        <div class="info-section">
+            <h2>Hello! Welcome to ArBitrage</h2>
+            <p>If you already have an account,</p>
+            <a href="/auth/login" class="sign-in-btn">Sign In</a>
+            <img src="/images/signup-illustration.png" alt="Sign Up Illustration" class="illustration">
+        </div>
+    </div>
+</body>
+
+</html>

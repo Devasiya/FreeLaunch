@@ -18,9 +18,25 @@ router.get("/register/client", (req, res) => {
 });
 
 // POST: Register Client
-router.post("/register/client", async (req, res) => {
+const multer = require("multer");
+
+// Set up multer storage
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "public/uploads/");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" + file.originalname);
+    },
+});
+
+const upload = multer({ storage });
+
+// Add this to your route to handle file uploads
+router.post("/register/client", upload.single("profilePhoto"), async (req, res) => {
     try {
         console.log("🔹 Received Request Body:", req.body);
+        console.log("📸 Received File:", req.file);
 
         const { email, password, ...otherDetails } = req.body;
         const existingClient = await Client.findOne({ email });
@@ -31,14 +47,23 @@ router.post("/register/client", async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const client = new Client({ ...otherDetails, email, password: hashedPassword });
+
+        // Include profile photo if uploaded
+        const profilePhotoUrl = req.file ? `/uploads/${req.file.filename}` : "";
+
+        const client = new Client({
+            ...otherDetails,
+            email,
+            password: hashedPassword,
+            profilePhoto: profilePhotoUrl,
+        });
 
         await client.save();
 
         req.flash("success", "Client registered successfully!");
         res.redirect("/auth/login");
     } catch (err) {
-        console.error(" Error Registering Client:", err);
+        console.error("❌ Error Registering Client:", err);
         req.flash("error", "Something went wrong!");
         res.redirect("/auth/register/client");
     }
@@ -56,27 +81,42 @@ router.get("/register/freelancer", (req, res) => {
 });
 
 //  POST: Register Freelancer
-router.post("/register/freelancer", async (req, res) => {
+// ✅ POST: Register Freelancer with Profile Photo Upload
+router.post("/register/freelancer", upload.single("profilePhoto"), async (req, res) => {
     try {
         console.log("🔹 Received Request Body:", req.body);
+        console.log("📸 Received File:", req.file);
 
         const { email, password, ...otherDetails } = req.body;
         const existingFreelancer = await Freelancer.findOne({ email });
 
+        // ❌ Check if email is already registered
         if (existingFreelancer) {
             req.flash("error", "Email is already registered!");
             return res.redirect("/auth/register/freelancer");
         }
 
+        // 🔒 Hash password before storing in DB
         const hashedPassword = await bcrypt.hash(password, 10);
-        const freelancer = new Freelancer({ ...otherDetails, email, password: hashedPassword });
 
+        // 📸 Include profile photo URL if uploaded
+        const profilePhotoUrl = req.file ? `/uploads/${req.file.filename}` : "";
+
+        // ✅ Create Freelancer object
+        const freelancer = new Freelancer({
+            ...otherDetails,
+            email,
+            password: hashedPassword,
+            profilePhoto: profilePhotoUrl,
+        });
+
+        // Save freelancer to DB
         await freelancer.save();
 
         req.flash("success", "Freelancer registered successfully!");
         res.redirect("/auth/login");
     } catch (err) {
-        console.error("Error Registering Freelancer:", err);
+        console.error("❌ Error Registering Freelancer:", err);
         req.flash("error", "Something went wrong!");
         res.redirect("/auth/register/freelancer");
     }
