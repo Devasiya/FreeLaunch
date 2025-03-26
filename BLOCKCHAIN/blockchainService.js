@@ -21,20 +21,28 @@ const wallet = new ethers.Wallet(
 // Connect to the contract
 const agreementContract = new ethers.Contract(contractAddress, contractABI, wallet);
 
-//  Create Agreement on Blockchain
+//create agreement on blockain
 async function createAgreement(freelancerAddress, terms) {
-    const tx = await agreementContract.createAgreement(freelancerAddress, terms);
-    await tx.wait();  // Ensure transaction is confirmed
-    console.log("Agreement Created on Blockchain:", tx.hash);
-    return tx;  // Return transaction object
+    try {
+        const tx = await agreementContract.createAgreement(freelancerAddress, terms);
+        await tx.wait();  // Ensure transaction is confirmed
+        console.log("Agreement Created on Blockchain:", tx.hash);
+        return tx;  // Return transaction object
+    } catch (error) {
+        console.error("Error creating agreement on blockchain:", error);
+        throw new Error("Blockchain transaction failed");
+    }
 }
-
-//  Complete Agreement on Blockchain
+//complete agreement on blockchain
 async function completeAgreement(agreementId) {
-    const tx = await agreementContract.completeAgreement(agreementId);
-    await tx.wait();  // Ensure transaction is confirmed
-    console.log(" Agreement Completed on Blockchain:", tx.hash);
-    return tx;  // Return transaction object
+    try {
+        const tx = await agreementContract.completeAgreement(agreementId);
+        await tx.wait();  // Ensure transaction is confirmed
+        console.log("Agreement Completed on Blockchain:", tx.hash);
+        return tx;  // Return transaction object
+    } catch (error) {
+        console.error("Error completing agreement on blockchain:", error);
+        throw new Error("Blockchain transaction failed");
+    }
 }
-
 module.exports = { createAgreement, completeAgreement };

@@ -4,43 +4,125 @@
             <%= client.firstName %>'s Projects
         </h1>
 
-        <!-- Button to Add New Project -->
-        <a href="/api/clients/<%= client._id %>/projects/add" class="btn btn-primary">Add New Project</a>
+        <body>
+            <div class="container">
+                <h1>
+                    <%= client.firstName %>'s Projects
+                </h1>
 
-        <% if (projects.length> 0) { %>
-            <ul class="project-list">
-                <% projects.forEach(project=> { %>
-                    <li class="project-item">
-                        <h2>
-                            <%= project.title %>
-                        </h2>
-                        <p><strong>Description:</strong>
-                            <%= project.description %>
-                        </p>
-                        <p><strong>Budget:</strong> $<%= project.budget %>
-                        </p>
-                        <p><strong>Deadline:</strong>
-                            <%= new Date(project.deadline).toDateString() %>
-                        </p>
-                        <p><strong>Status:</strong>
-                            <%= project.status %>
-                        </p>
+                <!-- Button to Add New Project -->
+                <a href="/api/clients/<%= client._id %>/projects/add" class="btn btn-primary">Add New Project</a>
 
+                <% if (projects.length> 0) { %>
+                    <ul class="project-list">
+                        <% projects.forEach(project=> { %>
+                            <li class="project-item">
+                                <h2>
+                                    <%= project.title %>
+                                </h2>
+                                <p><strong>Description:</strong>
+                                    <%= project.description %>
+                                </p>
+                                <p><strong>Budget:</strong> $<%= project.budget %>
+                                </p>
+                                <p><strong>Deadline:</strong>
+                                    <%= new Date(project.deadline).toDateString() %>
+                                </p>
+                                <p><strong>Status:</strong>
+                                    <%= project.status %>
+                                </p>
 
-                        <!-- Edit and Delete Buttons for each project -->
-                        <a href="/api/clients/<%= client._id %>/projects/<%= project._id %>/edit"
-                            class="btn btn-secondary">Edit</a>
-                        <form action="/api/clients/<%= client._id %>/projects/<%= project._id %>?_method=DELETE"
-                            method="POST" style="display:inline;">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </li>
-                    <% }) %>
-            </ul>
-            <% } else { %>
-                <p>No projects found for this client.</p>
-                <% } %>
+                                <!-- Create Agreement Button for Open Projects -->
+                                <% if (project.status==="Open" ) { %>
+                                    <a href="/api/agreements/create?projectId=<%= project._id %>"
+                                        class="btn btn-primary">Create
+                                        Agreement</a>
 
-                    <a href="/api/clients/<%= client._id %>" class="btn btn-secondary">Back to Client</a>
-    </div>
-</body>
+                                    <!-- Freelancer Assignment Form -->
+                                    <form
+                                        action="/api/clients/<%= client._id %>/projects/<%= project._id %>/assign-freelancer"
+                                        method="POST" style="display:inline;">
+                                        <select name="freelancerId" class="freelancer-select" required>
+                                            <option value="">Select a freelancer</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-secondary">Assign Freelancer</button>
+                                    </form>
+                                    <% } else { %>
+                                        <a href="/api/agreements/view/<%= project._id %>" class="btn btn-info">View
+                                            Agreement</a>
+                                        <% } %>
+
+                                            <!-- Edit and Delete Buttons for each project -->
+                                            <a href="/api/clients/<%= client._id %>/projects/<%= project._id %>/edit"
+                                                class="btn btn-secondary">Edit</a>
+                                            <form
+                                                action="/api/clients/<%= client._id %>/projects/<%= project._id %>?_method=DELETE"
+                                                method="POST" style="display:inline;">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } else { %>
+                        <p>No projects found for this client.</p>
+                        <% } %>
+
+                            <a href="/api/clients/<%= client._id %>" class="btn btn-secondary">Back to Client</a>
+            </div>
+
+            <!-- Include jQuery and Select2 CSS/JS -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+            <script>
+                $(document).ready(function () {
+                    $('.freelancer-select').select2({
+                        ajax: {
+                            url: '/api/clients/freelancers/search', // Endpoint to fetch freelancers
+                            dataType: 'json',
+                            delay: 250,
+                            data: function (params) {
+                                return {
+                                    q: params.term // Search term
+                                };
+                            },
+                            processResults: function (data) {
+                                return {
+                                    results: data.map(freelancer => ({
+                                        id: freelancer._id,
+                                        text: `${freelancer.firstName} ${freelancer.lastName}`
+                                    }))
+                                };
+                            },
+                            cache: true
+                        },
+                        minimumInputLength: 1 // Minimum characters to start searching
+                    });
+
+                    // Handle the form submission for assigning a freelancer
+                    $('#assignFreelancerForm').on('submit', function (e) {
+                        e.preventDefault(); // Prevent the default form submission
+
+                        const selectedFreelancerId = $('.freelancer-select').val(); // Get the selected freelancer ID
+                        const projectId = $(this).data('project-id'); // Assuming you have a data attribute for project ID
+                        const clientId = $(this).data('client-id'); // Assuming you have a data attribute for client ID
+
+                        $.ajax({
+                            url: `/api/clients/${clientId}/projects/${projectId}/assign-freelancer`,
+                            method: 'POST',
+                            data: { freelancerId: selectedFreelancerId },
+                            success: function (response) {
+                                alert(response.message); // Show success message
+                                // Redirect to the projects page
+                                window.location.replace(`/api/clients/${clientId}/projects`); // Redirect to the projects page
+                            },
+                            error: function (error) {
+                                console.error("Error assigning freelancer:", error);
+                                alert("An error occurred while assigning the freelancer.");
+                            }
+                        });
+                    });
+                });
+            </script>
+        </body>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Agreement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Create Agreement for Project: <%= project.title %>
+        </h1>
+        <form action="/api/agreements/create" method="POST">
+            <input type="hidden" name="client" value="<%= project.client %>">
+            <input type="hidden" name="freelancer" value="<%= project.assignedFreelancer %>">
+            <div class="form-group">
+                <label for="freelancerAddress">Freelancer Address</label>
+                <input type="text" name="freelancerAddress" id="freelancerAddress" class="form-control"
+                    placeholder="Freelancer Address" required>
+            </div>
+            <div class="form-group">
+                <label for="terms">Agreement Terms</label>
+                <textarea name="terms" id="terms" class="form-control" placeholder="Agreement Terms"
+                    required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date</label>
+                <input type="date" name="startDate" id="startDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date</label>
+                <input type="date" name="endDate" id="endDate" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Agreement</button>
+        </form>
+        <a href="/api/clients/<%= project.client %>/projects" class="btn btn-secondary mt-3">Back to Projects</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

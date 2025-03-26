@@ -2,6 +2,7 @@ const express = require("express");
 const Client = require("../models/client");
 const Project = require("../models/projects.js")
 const { isLoggedIn } = require("../middlewares/index.js");
+const Freelancer = require("../models/freelancer.js")
 
 const router = express.Router();
 
@@ -125,7 +126,7 @@ router.get("/:id/projects", async (req, res) => {
         res.render("clients/projects", {
             client,
             projects: client.projects,
-            title: `${client.firstName}'s Projects` // ✅ Ensuring title is passed
+            title: `${client.firstName}'s Projects` // Ensuring title is passed
         });
 
     } catch (err) {
@@ -239,6 +240,51 @@ router.delete('/:id/projects/:projectId', async (req, res) => {
         console.error('Error deleting project:', error);
         req.flash('error', 'Error deleting project');
         res.redirect(`/api/clients/${req.params.id}/projects`);
+    }
+});
+
+
+//END OF REVIEWS
+
+// Route to assign a freelancer to a project
+router.post("/:clientId/projects/:projectId/assign-freelancer", async (req, res) => {
+    const { projectId } = req.params;
+    const { freelancerId } = req.body; // Expecting freelancerId in the request body
+
+    try {
+        const project = await Project.findByIdAndUpdate(
+            projectId,
+            { assignedFreelancer: freelancerId }, // Update the assignedFreelancer field
+            { new: true } // Return the updated project
+        );
+
+        if (!project) {
+            return res.status(404).send("Project not found");
+        }
+
+        res.status(200).json({ message: "Freelancer assigned successfully", project });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error assigning freelancer");
+    }
+});
+
+// Route to search freelancers under the clients namespace
+router.get("/freelancers/search", async (req, res) => {
+    const { q } = req.query; // Get the search query
+
+    try {
+        const freelancers = await Freelancer.find({
+            $or: [
+                { firstName: { $regex: q, $options: 'i' } },
+                { lastName: { $regex: q, $options: 'i' } }
+            ]
+        }).select('_id firstName lastName'); // Select only necessary fields
+
+        res.json(freelancers);
+    } catch (error) {
+        console.error("Error fetching freelancers:", error);
+        res.status(500).send("Error fetching freelancers");
     }
 });
 
