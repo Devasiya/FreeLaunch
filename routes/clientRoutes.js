@@ -298,4 +298,25 @@ router.get("/freelancers/search", async (req, res) => {
     }
 });
 
+// Route to earn referral credits
+router.post('/:clientId/earn-referral-credits', async (req, res) => {
+    try {
+        await CreditService.earnReferralCreditsForClient(req.params.clientId);
+        res.status(200).send("Referral credits earned successfully.");
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+});
+
+// Route to post a project
+router.post('/:clientId/post-project', async (req, res) => {
+    const { projectCost } = req.body;
+    try {
+        await CreditService.postProject(req.params.clientId, projectCost);
+        res.status(200).send("Project posted successfully.");
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+});
+
 module.exports = router;

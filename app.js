@@ -28,6 +28,7 @@ const authRoutes = require("./routes/authRoutes.js");
 const clientRoutes = require("./routes/clientRoutes.js");
 const freelancerRoutes = require("./routes/freelancerRoutes.js");
 const agreementRoutes = require("./routes/agreementsRoutes.js");
+const transactionRoutes = require('./routes/transactionRoutes');
 
 // Connect to MongoDB
 const dbUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/sureConnect";
@@ -135,6 +136,7 @@ app.use("/auth", authRoutes);
 app.use("/api/clients", clientRoutes);
 app.use("/api/freelancers", freelancerRoutes);
 app.use('/api/agreements', agreementRoutes);
+app.use('/api/transactions', transactionRoutes);
 
 //  Catch-All Route for 404 Errors
 app.all("*", (req, res, next) => {

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Project</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <h2>Post a Project</h2>
+        <form id="postProjectForm">
+            <input type="number" id="projectCost" placeholder="Enter project cost in credits" required />
+            <input type="hidden" id="clientId" value="<%= clientId %>" />
+            <button type="submit">Post Project</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#postProjectForm').on('submit', async function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                const clientId = $('#clientId').val();
+                const projectCost = $('#projectCost').val();
+
+                try {
+                    const response = await $.post('/api/projects', { clientId, projectCost });
+                    $('#message').text(response.message);
+                } catch (error) {
+                    $('#message').text(error.responseJSON.error);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
