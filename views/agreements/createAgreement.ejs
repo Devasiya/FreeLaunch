@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Agreement</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/agreementCss/createAgreement.css"> <!-- Update the path as necessary -->
 </head>
 
 <body>
     <div class="container mt-5">
-        <h1>Create Agreement for Project: <%= project.title %>
+        <h1 class="text-center">Create Agreement for Project: <%= project.title %>
         </h1>
         <form action="/api/agreements/create" method="POST">
             <input type="hidden" name="client" value="<%= project.client %>">
@@ -33,9 +34,9 @@
                 <label for="endDate">End Date</label>
                 <input type="date" name="endDate" id="endDate" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary">Create Agreement</button>
+            <button type="submit" class="btn btn-success">Create Agreement</button>
+            <a href="/api/clients/<%= project.client %>/projects" class="btn btn-secondary mt-3">Back to Projects</a>
         </form>
-        <a href="/api/clients/<%= project.client %>/projects" class="btn btn-secondary mt-3">Back to Projects</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
