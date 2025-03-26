@@ -71,11 +71,17 @@ router.post("/create", async (req, res) => {
         await savedAgreement.save();
 
         // Redirect to a success page or render a success message
-        res.redirect(`/success?txHash=${blockchainTx.hash}`);
+        res.redirect(`/api/agreements/success?txHash=${blockchainTx.hash}`);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
     }
+});
+
+// Assuming you're using a templating engine like EJS, Pug, or Handlebars
+router.get("/success", (req, res) => {
+    const txHash = req.query.txHash; // Get the transaction hash from the query string
+    res.render("agreements/success", { txHash }); // Render the success page and pass the txHash
 });
 
 // Complete Agreement

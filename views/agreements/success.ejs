@@ -11,9 +11,9 @@
     <h1>Agreement Created Successfully!</h1>
     <p>Your agreement has been created on the blockchain.</p>
     <p>Transaction Hash: <strong>
-            <%= req.query.txHash %>
+            <%= txHash %> <!-- Use the txHash variable passed from the route handler -->
         </strong></p>
-    <a href="/api/agreements">Go back to create another agreement</a>
+
 </body>
 
 </html>

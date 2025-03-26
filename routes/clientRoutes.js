@@ -2,7 +2,8 @@ const express = require("express");
 const Client = require("../models/client");
 const Project = require("../models/projects.js")
 const { isLoggedIn } = require("../middlewares/index.js");
-const Freelancer = require("../models/freelancer.js")
+const Freelancer = require("../models/freelancer.js");
+const mongoose = require('mongoose');
 
 const router = express.Router();
 
@@ -249,13 +250,22 @@ router.delete('/:id/projects/:projectId', async (req, res) => {
 // Route to assign a freelancer to a project
 router.post("/:clientId/projects/:projectId/assign-freelancer", async (req, res) => {
     const { projectId } = req.params;
-    const { freelancerId } = req.body; // Expecting freelancerId in the request body
+    const { freelancerId } = req.body;
+
+    // Log the incoming projectId and freelancerId
+    console.log("Incoming Project ID:", projectId);
+    console.log("Incoming Freelancer ID:", freelancerId);
+
+    // Check if projectId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(projectId)) {
+        return res.status(400).send("Invalid Project ID");
+    }
 
     try {
         const project = await Project.findByIdAndUpdate(
             projectId,
-            { assignedFreelancer: freelancerId }, // Update the assignedFreelancer field
-            { new: true } // Return the updated project
+            { assignedFreelancer: freelancerId },
+            { new: true }
         );
 
         if (!project) {
@@ -264,7 +274,7 @@ router.post("/:clientId/projects/:projectId/assign-freelancer", async (req, res)
 
         res.status(200).json({ message: "Freelancer assigned successfully", project });
     } catch (error) {
-        console.error(error);
+        console.error("Error assigning freelancer:", error);
         res.status(500).send("Error assigning freelancer");
     }
 });

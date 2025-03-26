@@ -6,9 +6,6 @@
 
         <body>
             <div class="container">
-                <h1>
-                    <%= client.firstName %>'s Projects
-                </h1>
 
                 <!-- Button to Add New Project -->
                 <a href="/api/clients/<%= client._id %>/projects/add" class="btn btn-primary">Add New Project</a>
@@ -113,6 +110,7 @@
                             method: 'POST',
                             data: { freelancerId: selectedFreelancerId },
                             success: function (response) {
+                                console.log("Response from server:", response);
                                 alert(response.message); // Show success message
                                 // Redirect to the projects page
                                 window.location.replace(`/api/clients/${clientId}/projects`); // Redirect to the projects page
