@@ -1,68 +1,186 @@
-<div class="container mt-4">
-    <h1 class="text-center">All Clients</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- Flash Messages -->
-    <% if (error) { %>
-        <div class="alert alert-danger">
-            <%= error %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Clients - SureConnect</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/clientCss/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">SureConnect</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                    <li class="nav-item"><a class="btn btn-light" href="/auth/login">Login</a></li>
+                </ul>
+            </div>
         </div>
-        <% } %>
-            <% if (success) { %>
-                <div class="alert alert-success">
-                    <%= success %>
-                </div>
-                <% } %>
+    </nav>
 
-                    <% if (clients.length===0) { %>
-                        <p class="text-muted text-center">No clients found.</p>
-                        <% } else { %>
-                            <table class="table table-striped mt-3">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>Profile</th>
-                                        <th>Name</th>
-                                        <th>Company</th>
-                                        <th>Projects</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+    <div class="container my-5">
+        <h1 class="text-center text-primary">All Clients</h1>
+
+        <!-- Flash Messages -->
+        <% if (error && typeof error==="string" && error.trim() !=="" ) { %>
+            <div class="alert alert-danger">
+                <%= error %>
+            </div>
+            <% } %>
+
+                <% if (success && typeof success==="string" && success.trim() !=="" ) { %>
+                    <div class="alert alert-success">
+                        <%= success %>
+                    </div>
+                    <% } %>
+
+                        <!-- No Clients Found -->
+                        <% if (clients.length===0) { %>
+                            <p class="text-muted text-center">No clients found.</p>
+                            <% } else { %>
+
+                                <div class="row">
                                     <% clients.forEach(client=> { %>
-                                        <tr>
-                                            <!-- Profile Photo -->
-                                            <td>
-                                                <% if (client.profilePhoto) { %>
-                                                    <img src="<%= client.profilePhoto %>" alt="Profile"
-                                                        class="rounded-circle" width="50" height="50">
-                                                    <% } else { %>
-                                                        <span class="text-muted">N/A</span>
-                                                        <% } %>
-                                            </td>
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card shadow-sm">
+                                                <!-- Profile Image -->
+                                                <img src="<%= client.profilePhoto || '/images/image1.png' %>"
+                                                    alt="Profile" class="card-img-top">
 
-                                            <!-- Name -->
-                                            <td>
-                                                <%= client.firstName || "" %>
-                                                    <%= client.lastName || "" %>
-                                            </td>
-
-                                            <!-- Company Name -->
-                                            <td>
-                                                <%= client.companyName || "N/A" %>
-                                            </td>
-
-                                            <!-- Number of Projects -->
-                                            <td>
-                                                <%= client.projects.length %>
-                                            </td>
-
-                                            <!-- Actions -->
-                                            <td>
-                                                <a href="/api/clients/<%= client._id %>"
-                                                    class="btn btn-info btn-sm">View</a>
-                                            </td>
-                                        </tr>
+                                                <div class="card-body text-center">
+                                                    <h5 class="card-title text-primary">
+                                                        <%= client.firstName || "" %>
+                                                            <%= client.lastName || "" %>
+                                                    </h5>
+                                                    <p class="card-text">
+                                                        <i class="fas fa-building"></i> <strong>Company:</strong>
+                                                        <%= client.companyName || "N/A" %>
+                                                    </p>
+                                                    <p class="card-text">
+                                                        <i class="fas fa-project-diagram"></i>
+                                                        <strong>Projects:</strong>
+                                                        <%= client.projects.length %>
+                                                    </p>
+                                                    <a href="/api/clients/<%= client._id %>" class="btn btn-primary">
+                                                        <i class="fas fa-eye"></i> View Profile
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <% }) %>
-                                </tbody>
-                            </table>
-                            <% } %>
-</div>
+                                </div>
+
+                                <% } %>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-container">
+
+            <!-- Categories Column -->
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Graphics & Design</a>
+                    <a href="#" class="footer-link">Digital Marketing</a>
+                    <a href="#" class="footer-link">Writing & Translation</a>
+                    <a href="#" class="footer-link">Video & Animation</a>
+                    <a href="#" class="footer-link">Music & Audio</a>
+                    <a href="#" class="footer-link">Programming & Tech</a>
+                    <a href="#" class="footer-link">AI Services</a>
+                    <a href="#" class="footer-link">Consulting</a>
+                    <a href="#" class="footer-link">Data</a>
+                    <a href="#" class="footer-link">Business</a>
+                    <a href="#" class="footer-link">Personal Growth & Hobbies</a>
+                    <a href="#" class="footer-link">Photography</a>
+                    <a href="#" class="footer-link">Finance</a>
+                    <a href="#" class="footer-link">End-to-End Projects</a>
+                    <a href="#" class="footer-link">Service Catalog</a>
+                </div>
+            </div>
+
+            <!-- For Clients Column -->
+            <div class="footer-column">
+                <h3>For Clients</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">How SureConnect Works</a>
+                    <a href="#" class="footer-link">Customer Success Stories</a>
+                    <a href="#" class="footer-link">Trust & Safety</a>
+                    <a href="#" class="footer-link">Quality Guide</a>
+                    <a href="#" class="footer-link">SureConnect Learn</a>
+                    <a href="#" class="footer-link">SureConnect Guides</a>
+                    <a href="#" class="footer-link">SureConnect Answers</a>
+                </div>
+            </div>
+
+            <!-- For Freelancers Column -->
+            <div class="footer-column">
+                <h3>For Freelancers</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Become a SureConnect Freelancer</a>
+                    <a href="#" class="footer-link">Become an Agency</a>
+                    <a href="#" class="footer-link">Freelancer Equity Program</a>
+                    <a href="#" class="footer-link">Kickstart</a>
+                    <a href="#" class="footer-link">Community Hub</a>
+                    <a href="#" class="footer-link">Forum</a>
+                    <a href="#" class="footer-link">Events</a>
+                </div>
+            </div>
+
+            <!-- Business Solutions Column -->
+            <div class="footer-column">
+                <h3>Business Solutions</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">SureConnect Pro</a>
+                    <a href="#" class="footer-link">Project Management Service</a>
+                    <a href="#" class="footer-link">ClearVoice</a>
+                    <a href="#" class="footer-link">Working Not Working</a>
+                    <a href="#" class="footer-link">AutoDS</a>
+                    <a href="#" class="footer-link">SureConnect Logo Maker</a>
+                    <a href="#" class="footer-link">Contact Sales</a>
+                    <a href="#" class="footer-link">SureConnect Go</a>
+                </div>
+            </div>
+
+            <!-- Company Column -->
+            <div class="footer-column">
+                <h3>Company</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">About SureConnect</a>
+                    <a href="#" class="footer-link">Help & Support</a>
+                    <a href="#" class="footer-link">Social Impact</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Do not sell or share my info</a>
+                    <a href="#" class="footer-link">Partnerships</a>
+                    <a href="#" class="footer-link">Creator Network</a>
+                    <a href="#" class="footer-link">Affiliates</a>
+                    <a href="#" class="footer-link">Invite a Friend</a>
+                    <a href="#" class="footer-link">Press & News</a>
+                    <a href="#" class="footer-link">Investor Relations</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

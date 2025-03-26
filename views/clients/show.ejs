@@ -1,129 +1,227 @@
-<div class="container mt-4">
-    <h1 class="text-center">Client Details</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- Flash Messages -->
-    <% if (error) { %>
-        <div class="alert alert-danger">
-            <%= error %>
-        </div>
-        <% } %>
-            <% if (success) { %>
-                <div class="alert alert-success">
-                    <%= success %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= client.firstName || "" %>
+            <%= client.lastName || "" %> - Profile
+    </title>
+    <link rel="stylesheet" href="/clientCss/show.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">SureConnect</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/auth/login" class="btn login-btn">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="profile-card">
+            <!-- Left Section with Profile Photo -->
+            <div class="profile-left">
+                <div class="profile-box">
+                    <% if (client.profilePhoto) { %>
+                        <img src="<%= client.profilePhoto %>" alt="Profile" class="profile-img">
+                        <% } else { %>
+                            <p class="text-muted">No Profile Photo</p>
+                            <% } %>
                 </div>
-                <% } %>
+            </div>
 
-                    <div class="card mt-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <!-- Profile Picture -->
-                                <div class="col-md-3 text-center">
-                                    <% if (client.profilePhoto) { %>
-                                        <img src="<%= client.profilePhoto %>" alt="Profile"
-                                            class="rounded-circle img-fluid" width="150" height="150">
-                                        <% } else { %>
-                                            <p class="text-muted">No Profile Photo</p>
-                                            <% } %>
-                                </div>
+            <!-- Right Section with Client Details -->
+            <div class="profile-right">
+                <h2>
+                    <%= client.firstName || "" %>
+                        <%= client.lastName || "" %>
+                </h2>
+                <p class="profession">
+                    <%= client.category || "N/A" %>
+                </p>
+                <p><strong>Company:</strong>
+                    <%= client.companyName || "N/A" %>
+                </p>
+                <p><strong>Email:</strong>
+                    <%= client.email %>
+                </p>
+                <p><strong>Phone:</strong>
+                    <%= client.phoneNumber || "N/A" %>
+                </p>
+                <p><strong>Description:</strong>
+                    <%= client.description || "N/A" %>
+                </p>
+                <p><strong>Credits:</strong>
+                    <%= client.credits || "0" %>
+                </p>
 
-                                <!-- Client Details -->
-                                <div class="col-md-9">
-                                    <h3>
-                                        <%= client.firstName || "" %>
-                                            <%= client.lastName || "" %>
-                                    </h3>
-                                    <p><strong>Company:</strong>
-                                        <%= client.companyName || "N/A" %>
-                                    </p>
-                                    <p><strong>Email:</strong>
-                                        <%= client.email %>
-                                    </p>
-                                    <p><strong>Phone:</strong>
-                                        <%= client.phoneNumber || "N/A" %>
-                                    </p>
-                                    <p><strong>Category:</strong>
-                                        <%= client.category || "N/A" %>
-                                    </p>
-                                    <p><strong>Description:</strong>
-                                        <%= client.description || "N/A" %>
-                                    </p>
-                                    <p><strong>Credits:</strong>
-                                        <%= client.credits %>
-                                    </p>
+                <!-- Location -->
+                <p><strong>Location:</strong>
+                    <%= client.location.city || "N/A" %>,
+                        <%= client.location.state || "N/A" %>,
+                            <%= client.location.country || "N/A" %>,
+                                <%= client.location.pincode || "N/A" %>
+                </p>
 
-                                    <!-- Location -->
-                                    <p><strong>Location:</strong>
-                                        <%= client.location.city || "N/A" %>,
-                                            <%= client.location.state || "N/A" %>,
-                                                <%= client.location.country || "N/A" %>,
-                                                    <%= client.location.pincode || "N/A" %>
-                                    </p>
-
-                                    <!-- Social Links -->
-                                    <p><strong>Socials:</strong>
-                                        <% if (client.instagramLink) { %>
-                                            <a href="<%= client.instagramLink %>" target="_blank">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png"
-                                                    alt="Instagram" width="20">
-                                            </a>
-                                            <% } %>
-                                                <% if (client.linkedInLink) { %>
-                                                    <a href="<%= client.linkedInLink %>" target="_blank">
-                                                        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384014.png"
-                                                            alt="LinkedIn" width="20">
-                                                    </a>
-                                                    <% } %>
-                                    </p>
-
-                                    <!-- Actions -->
-                                    <a href="/api/clients/<%= client._id %>/edit" class="btn btn-warning">Edit</a>
-                                    <form action="/api/clients/<%= client._id %>?_method=DELETE" method="POST"
-                                        style="display: inline;">
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Are you sure?');">Delete</button>
-                                    </form>
-                                    <!-- Add View Projects Button -->
-                                    <a href="/api/clients/<%= client._id %>/projects" class="btn btn-primary mt-3">View
-                                        Projects</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Projects Section -->
-                    <div class="mt-4">
-                        <h3>Projects</h3>
-                        <% if (client.projects.length===0) { %>
-                            <p class="text-muted">No projects available.</p>
-                            <% } else { %>
-                                <ul class="list-group">
-                                    <% client.projects.forEach(project=> { %>
-                                        <li class="list-group-item">
-                                            <strong>
-                                                <%= project.title %>
-                                            </strong> - <%= project.description || "No description available" %>
-                                        </li>
-                                        <% }) %>
-                                </ul>
+                <!-- Social Links -->
+                <div class="social-links">
+                    <% if (client.instagramLink) { %>
+                        <a href="<%= client.instagramLink %>" target="_blank">
+                            <i class="fa-brands fa-instagram fa-2x"></i>
+                        </a>
+                        <% } %>
+                            <% if (client.linkedInLink) { %>
+                                <a href="<%= client.linkedInLink %>" target="_blank">
+                                    <i class="fa-brands fa-linkedin fa-2x"></i>
+                                </a>
                                 <% } %>
-                    </div>
+                </div>
 
-                    <!-- Reviews Section -->
-                    <div class="mt-4">
-                        <h3>Reviews</h3>
-                        <% if (client.reviews.length===0) { %>
-                            <p class="text-muted">No reviews yet.</p>
-                            <% } else { %>
-                                <ul class="list-group">
-                                    <% client.reviews.forEach(review=> { %>
-                                        <li class="list-group-item">
-                                            <strong>Rating:</strong>
-                                            <%= review.rating %>/5 <br>
-                                                <%= review.comment || "No comment provided" %>
-                                        </li>
-                                        <% }) %>
-                                </ul>
-                                <% } %>
-                    </div>
+                <!-- Buttons -->
+                <a href="/api/clients/<%= client._id %>/edit" class="btn btn-edit">Edit</a>
+                <form action="/api/clients/<%= client._id %>?_method=DELETE" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Are you sure?');">Delete</button>
+                </form>
+                <a href="/api/clients/<%= client._id %>/projects" class="btn btn-view">View Projects</a>
+            </div>
+        </div>
 
-</div>
+        <!-- Projects Section -->
+        <div class="section">
+            <h3>Projects</h3>
+            <% if (client.projects.length===0) { %>
+                <p class="text-muted">No projects available.</p>
+                <% } else { %>
+                    <ul class="list-group">
+                        <% client.projects.forEach(project=> { %>
+                            <li class="list-group-item">
+                                <strong>
+                                    <%= project.title %>
+                                </strong> - <%= project.description || "No description available" %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } %>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="section">
+            <h3>Reviews</h3>
+            <% if (client.reviews.length===0) { %>
+                <p class="text-muted">No reviews yet.</p>
+                <% } else { %>
+                    <ul class="list-group">
+                        <% client.reviews.forEach(review=> { %>
+                            <li class="list-group-item">
+                                <strong>Rating:</strong>
+                                <%= review.rating %>/5 <br>
+                                    <%= review.comment || "No comment provided" %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } %>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-container">
+
+            <!-- Categories Column -->
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Graphics & Design</a>
+                    <a href="#" class="footer-link">Digital Marketing</a>
+                    <a href="#" class="footer-link">Writing & Translation</a>
+                    <a href="#" class="footer-link">Video & Animation</a>
+                    <a href="#" class="footer-link">Music & Audio</a>
+                    <a href="#" class="footer-link">Programming & Tech</a>
+                    <a href="#" class="footer-link">AI Services</a>
+                    <a href="#" class="footer-link">Consulting</a>
+                    <a href="#" class="footer-link">Data</a>
+                    <a href="#" class="footer-link">Business</a>
+                    <a href="#" class="footer-link">Personal Growth & Hobbies</a>
+                    <a href="#" class="footer-link">Photography</a>
+                    <a href="#" class="footer-link">Finance</a>
+                    <a href="#" class="footer-link">End-to-End Projects</a>
+                    <a href="#" class="footer-link">Service Catalog</a>
+                </div>
+            </div>
+
+            <!-- For Clients Column -->
+            <div class="footer-column">
+                <h3>For Clients</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">How SureConnect Works</a>
+                    <a href="#" class="footer-link">Customer Success Stories</a>
+                    <a href="#" class="footer-link">Trust & Safety</a>
+                    <a href="#" class="footer-link">Quality Guide</a>
+                    <a href="#" class="footer-link">SureConnect Learn</a>
+                    <a href="#" class="footer-link">SureConnect Guides</a>
+                    <a href="#" class="footer-link">SureConnect Answers</a>
+                </div>
+            </div>
+
+            <!-- For Freelancers Column -->
+            <div class="footer-column">
+                <h3>For Freelancers</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Become a SureConnect Freelancer</a>
+                    <a href="#" class="footer-link">Become an Agency</a>
+                    <a href="#" class="footer-link">Freelancer Equity Program</a>
+                    <a href="#" class="footer-link">Kickstart</a>
+                    <a href="#" class="footer-link">Community Hub</a>
+                    <a href="#" class="footer-link">Forum</a>
+                    <a href="#" class="footer-link">Events</a>
+                </div>
+            </div>
+
+            <!-- Business Solutions Column -->
+            <div class="footer-column">
+                <h3>Business Solutions</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">SureConnect Pro</a>
+                    <a href="#" class="footer-link">Project Management Service</a>
+                    <a href="#" class="footer-link">ClearVoice</a>
+                    <a href="#" class="footer-link">Working Not Working</a>
+                    <a href="#" class="footer-link">AutoDS</a>
+                    <a href="#" class="footer-link">SureConnect Logo Maker</a>
+                    <a href="#" class="footer-link">Contact Sales</a>
+                    <a href="#" class="footer-link">SureConnect Go</a>
+                </div>
+            </div>
+
+            <!-- Company Column -->
+            <div class="footer-column">
+                <h3>Company</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">About SureConnect</a>
+                    <a href="#" class="footer-link">Help & Support</a>
+                    <a href="#" class="footer-link">Social Impact</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Do not sell or share my info</a>
+                    <a href="#" class="footer-link">Partnerships</a>
+                    <a href="#" class="footer-link">Creator Network</a>
+                    <a href="#" class="footer-link">Affiliates</a>
+                    <a href="#" class="footer-link">Invite a Friend</a>
+                    <a href="#" class="footer-link">Press & News</a>
+                    <a href="#" class="footer-link">Investor Relations</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

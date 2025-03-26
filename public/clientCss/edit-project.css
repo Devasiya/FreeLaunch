@@ -1,0 +1,99 @@
+body {
+    background: linear-gradient(180deg, #001f3f, #004aad);
+    /* Dark Blue Gradient Background */
+    color: #ffffff;
+    /* White text for better contrast */
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    /* Semi-transparent background for the form */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    color: #00d4ff;
+    /* Electric Blue for the heading */
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    color: #00d4ff;
+    /* Electric Blue for labels */
+}
+
+.form-control {
+    background-color: #001f3f;
+    /* Dark background for input fields */
+    color: #ffffff;
+    /* White text for input fields */
+    border: 1px solid #00d4ff;
+    /* Electric Blue border */
+}
+
+.form-control:focus {
+    border-color: #00d4ff;
+    /* Electric Blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+    /* Electric Blue glow on focus */
+}
+
+.btn-success {
+    background-color: #00d4ff;
+    /* Electric Blue button */
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #0099cc;
+    /* Darker shade on hover */
+}
+
+.btn-secondary {
+    background-color: transparent;
+    /* Transparent background for back button */
+    color: #00d4ff;
+    /* Electric Blue text */
+    border: 1px solid #00d4ff;
+    /* Electric Blue border */
+}
+
+.btn-secondary:hover {
+    background-color: #00d4ff;
+    /* Electric Blue background on hover */
+    color: #ffffff;
+    /* White text on hover */
+}
+
+/* Fix Extra Background Issue */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center Container Properly */
+body {
+    background: linear-gradient(180deg, #001f3f, #004aad);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Updated Container Styles */
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}

@@ -1,37 +1,234 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - SureConnect</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>SureConnect</title>
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">SureConnect</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="/api/freelancers">View Freelancers</a></li>
+            <li><a href="/api/clients">View Clients</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="/auth/login" class="btn login-btn">Login</a>
+            <div class="dropdown">
+                <button class="btn signup-btn">Sign Up</button>
+                <div class="dropdown-content">
+                    <a href="/auth/register/freelancer">Sign Up as Freelancer</a>
+                    <a href="/auth/register/client">Sign Up as Client</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Header -->
-    <header>
-        <nav>
-            <ul>
-                <% if (!currUser) { %>
-                    <li><a href="/auth/login">Login</a></li>
-                    <li><a href="/auth/register/client">Register as Client</a></li>
-                    <li><a href="/auth/register/freelancer">Register as Freelancer</a></li>
-                    <% } else { %>
-                        <li><a href="/auth/logout">Logout</a></li>
-                        <% } %>
-                            <li><a href="/api/clients">Clients Page</a></li>
-                            <li><a href="/api/freelancers">Freelancers Page</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>WE CREATE SOLUTIONS FOR YOUR BUSINESSES.</h1>
+        <p>Empowering freelancers and businesses to achieve success together.</p>
+        <div class="hero-video">
+            <img src="https://imgs.search.brave.com/E2pw4HXF20FhmuIBvULUOAXPhDT7DCsqRk-WLMl430w/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTQ2/NDg1MzQ2Ni9waG90/by9wbGFjZS1vZi13/b3JrLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1KbjBXLW9a/ZEJqdG04MGdXaFd6/cm9wVWVXb09EeFly/eGJXSWtuaUFiaEdj/PQ"
+                alt="Team Working" />
+        </div>
+    </section>
 
-    <!-- Main Content -->
-    <main>
-        <h1>Welcome to SureConnect</h1>
-        <p>Your one-stop freelancing platform connecting clients and freelancers.</p>
-    </main>
+    <!-- Our Services -->
+    <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-container">
+            <div class="service">
+                <h3>Web Development</h3>
+                <p>Custom websites tailored to your needs.</p>
+            </div>
+            <div class="service">
+                <h3>AI Services</h3>
+                <p>Innovative AI solutions for businesses.</p>
+            </div>
+            <div class="service">
+                <h3>Graphic Design</h3>
+                <p>Creative designs to boost your brand.</p>
+            </div>
+            <div class="service">
+                <h3>Content Writing</h3>
+                <p>Engaging content for all platforms.</p>
+            </div>
+            <div class="service">
+                <h3>Marketing</h3>
+                <p>Grow your business with expert marketing.</p>
+            </div>
+            <div class="service">
+                <h3>Video Editing</h3>
+                <p>Professional video editing services.</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Success Stories Section -->
+    <section class="success-stories">
+        <h2>Success Stories</h2>
+        <div class="story-container">
+
+            <!-- Anna's Story -->
+            <div class="story">
+                <img src="/images/image1.png" alt="Client 1">
+                <h3>Anna’s Story</h3>
+                <p>SureConnect helped me find the perfect clients to grow my design business.</p>
+            </div>
+
+            <!-- James' Story -->
+            <div class="story">
+                <img src="/images/image2.png" alt="Client 2">
+                <h3>James’ Experience</h3>
+                <p>Collaborating through SureConnect was seamless and rewarding.</p>
+            </div>
+
+            <!-- NEW Success Story: Mia's Journey -->
+            <div class="story">
+                <img src="/images/image3.png" alt="Client 3">
+                <h3>Mia's Journey</h3>
+                <p>Thanks to SureConnect, I was able to turn my hobby into a full-time career!</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Premium Features -->
+    <section class="premium-features">
+        <h2>Premium Features</h2>
+        <div class="feature-container">
+            <div class="feature">
+                <h3>Data Security</h3>
+                <p>Your data is encrypted and secure.</p>
+            </div>
+            <div class="feature">
+                <h3>Seamless Connectivity</h3>
+                <p>Uninterrupted connections with optimized performance.</p>
+            </div>
+            <div class="feature">
+                <h3>Priority Support</h3>
+                <p>Access 24/7 customer support for all needs.</p>
+            </div>
+            <div class="feature">
+                <h3>Advanced Encryption</h3>
+                <p>Protect your sensitive information.</p>
+            </div>
+            <div class="feature">
+                <h3>Team Management</h3>
+                <p>Collaborate using intuitive tools.</p>
+            </div>
+            <div class="feature">
+                <h3>Analytics Insights</h3>
+                <p>Get valuable insights with detailed reports.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moto Section -->
+    <section class="moto">
+        <h2>SURE TO CONNECT. SURE TO SUCCEED.</h2>
+    </section>
+
+
+    <div class="footer">
+        <div class="footer-container">
+
+            <!-- Categories Column -->
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Graphics & Design</a>
+                    <a href="#" class="footer-link">Digital Marketing</a>
+                    <a href="#" class="footer-link">Writing & Translation</a>
+                    <a href="#" class="footer-link">Video & Animation</a>
+                    <a href="#" class="footer-link">Music & Audio</a>
+                    <a href="#" class="footer-link">Programming & Tech</a>
+                    <a href="#" class="footer-link">AI Services</a>
+                    <a href="#" class="footer-link">Consulting</a>
+                    <a href="#" class="footer-link">Data</a>
+                    <a href="#" class="footer-link">Business</a>
+                    <a href="#" class="footer-link">Personal Growth & Hobbies</a>
+                    <a href="#" class="footer-link">Photography</a>
+                    <a href="#" class="footer-link">Finance</a>
+                    <a href="#" class="footer-link">End-to-End Projects</a>
+                    <a href="#" class="footer-link">Service Catalog</a>
+                </div>
+            </div>
+
+            <!-- For Clients Column -->
+            <div class="footer-column">
+                <h3>For Clients</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">How SureConnect Works</a>
+                    <a href="#" class="footer-link">Customer Success Stories</a>
+                    <a href="#" class="footer-link">Trust & Safety</a>
+                    <a href="#" class="footer-link">Quality Guide</a>
+                    <a href="#" class="footer-link">SureConnect Learn</a>
+                    <a href="#" class="footer-link">SureConnect Guides</a>
+                    <a href="#" class="footer-link">SureConnect Answers</a>
+                </div>
+            </div>
+
+            <!-- For Freelancers Column -->
+            <div class="footer-column">
+                <h3>For Freelancers</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Become a SureConnect Freelancer</a>
+                    <a href="#" class="footer-link">Become an Agency</a>
+                    <a href="#" class="footer-link">Freelancer Equity Program</a>
+                    <a href="#" class="footer-link">Kickstart</a>
+                    <a href="#" class="footer-link">Community Hub</a>
+                    <a href="#" class="footer-link">Forum</a>
+                    <a href="#" class="footer-link">Events</a>
+                </div>
+            </div>
+
+            <!-- Business Solutions Column -->
+            <div class="footer-column">
+                <h3>Business Solutions</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">SureConnect Pro</a>
+                    <a href="#" class="footer-link">Project Management Service</a>
+                    <a href="#" class="footer-link">ClearVoice</a>
+                    <a href="#" class="footer-link">Working Not Working</a>
+                    <a href="#" class="footer-link">AutoDS</a>
+                    <a href="#" class="footer-link">SureConnect Logo Maker</a>
+                    <a href="#" class="footer-link">Contact Sales</a>
+                    <a href="#" class="footer-link">SureConnect Go</a>
+                </div>
+            </div>
+
+            <!-- Company Column -->
+            <div class="footer-column">
+                <h3>Company</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">About SureConnect</a>
+                    <a href="#" class="footer-link">Help & Support</a>
+                    <a href="#" class="footer-link">Social Impact</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Do not sell or share my info</a>
+                    <a href="#" class="footer-link">Partnerships</a>
+                    <a href="#" class="footer-link">Creator Network</a>
+                    <a href="#" class="footer-link">Affiliates</a>
+                    <a href="#" class="footer-link">Invite a Friend</a>
+                    <a href="#" class="footer-link">Press & News</a>
+                    <a href="#" class="footer-link">Investor Relations</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

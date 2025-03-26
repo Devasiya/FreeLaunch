@@ -1,0 +1,160 @@
+/* Body Background - Gradient Blue */
+body {
+    background: linear-gradient(135deg, #004aad, #001f3f);
+    /* Gradient from Blue to Dark Navy */
+    color: #ffffff;
+    /* White text for better contrast */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Styles */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 25px;
+    background: linear-gradient(135deg, #003366, #001f3f);
+    /* Dark Blue Gradient Background */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* Heading Style */
+h1 {
+    color: #00d4ff;
+    /* Electric Blue Heading */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Project List Styling */
+.project-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Individual Project Item */
+.project-item {
+    background: rgba(0, 31, 63, 0.9);
+    /* Dark Blue with slight transparency */
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #00d4ff;
+    border-radius: 8px;
+}
+
+/* Project Title */
+.project-item h2 {
+    color: #00d4ff;
+    margin-bottom: 10px;
+}
+
+/* Paragraphs inside Project Item */
+.project-item p {
+    margin: 5px 0;
+    color: #ffffff;
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Primary Button - Add Project & Create Agreement */
+.btn-primary {
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    border: none;
+    color: #001f3f;
+    /* Dark text for contrast */
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0099cc, #0077b3);
+    color: #fff;
+}
+
+/* Secondary Button - Edit and Back */
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+}
+
+.btn-secondary:hover {
+    background: #00d4ff;
+    color: #ffffff;
+}
+
+/* Danger Button - Delete */
+.btn-danger {
+    background: linear-gradient(135deg, #ff4d4d, #ff1a1a);
+    border: none;
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #ff1a1a, #cc0000);
+}
+
+/* Freelancer Select Box */
+.freelancer-select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #001f3f;
+    color: #ffffff;
+    border: 1px solid #00d4ff;
+}
+
+/* Style for Select2 Dropdown */
+.select2-container--default .select2-selection--single {
+    background-color: #001f3f;
+    border: 1px solid #00d4ff;
+    color: #ffffff;
+}
+
+/* On Focus */
+.select2-container--default .select2-selection--single:focus {
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.7);
+}
+
+/* Success Alert */
+.alert-success {
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    color: #001f3f;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Error Alert */
+.alert-danger {
+    background: linear-gradient(135deg, #ff4d4d, #ff1a1a);
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Mobile Responsive Styling */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-top: 5px;
+    }
+}

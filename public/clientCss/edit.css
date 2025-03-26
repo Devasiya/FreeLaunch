@@ -1,0 +1,95 @@
+/* Body Background - Updated Gradient */
+body {
+    background: linear-gradient(135deg, #004aad, #001f3f);
+    /* Gradient from Blue to Dark Navy */
+    color: #ffffff;
+    /* White text for better contrast */
+}
+
+/* Container - Updated Background & Shadow */
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 25px;
+    background: linear-gradient(135deg, #003366, #001f3f);
+    /* Deep Blue Gradient Background */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Heading Style */
+h1 {
+    color: #00d4ff;
+    /* Electric Blue for heading */
+    margin-bottom: 25px;
+}
+
+/* Label Style */
+.form-group label {
+    color: #00d4ff;
+    /* Electric Blue for labels */
+}
+
+/* Input & Textarea Styles */
+.form-control {
+    background-color: rgba(0, 31, 63, 0.9);
+    /* Slightly Transparent Dark Blue */
+    color: #ffffff;
+    /* White text for input fields */
+    border: 1px solid #00d4ff;
+    /* Electric Blue border */
+}
+
+/* Focus Effect on Inputs */
+.form-control:focus {
+    border-color: #00d4ff;
+    /* Electric Blue border on focus */
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.7);
+    /* Electric Blue glow on focus */
+}
+
+/* Success Button - Updated */
+.btn-success {
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    /* Electric Blue to Dark Blue */
+    border: none;
+    color: #001f3f;
+    /* Dark text for contrast */
+}
+
+/* Success Button Hover Effect */
+.btn-success:hover {
+    background: linear-gradient(135deg, #0099cc, #0077b3);
+    /* Darker Blue Gradient on Hover */
+    color: #fff;
+}
+
+/* Secondary (Cancel) Button - Updated */
+.btn-secondary {
+    background-color: transparent;
+    /* Transparent background */
+    color: #00d4ff;
+    /* Electric Blue text */
+    border: 1px solid #00d4ff;
+    /* Electric Blue border */
+}
+
+/* Cancel Button Hover Effect */
+.btn-secondary:hover {
+    background-color: #00d4ff;
+    /* Electric Blue background on hover */
+    color: #ffffff;
+    /* White text on hover */
+}
+
+/* Responsive for Small Screens */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}

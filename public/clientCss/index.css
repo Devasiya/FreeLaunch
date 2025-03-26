@@ -1,0 +1,165 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #001f3f, #004aad);
+    /* Dark Blue Gradient */
+    color: #f8f9fa;
+    /* Light text color to contrast with dark background */
+}
+
+/* Navbar */
+.navbar {
+    background: #001f3f;
+    /* Dark Blue Background for Navbar */
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00d4ff;
+    /* Electric Blue for Navbar brand */
+}
+
+.navbar-toggler-icon {
+    background-color: #00d4ff;
+    /* Electric Blue for toggle icon */
+}
+
+.nav-link {
+    color: #f8f9fa;
+    /* Light color for navbar links */
+}
+
+.nav-link:hover {
+    color: #00d4ff;
+    /* Electric Blue on hover */
+}
+
+/* Flash Messages */
+.alert {
+    border-radius: 8px;
+    background-color: rgba(0, 212, 255, 0.1);
+    /* Subtle Electric Blue Background for alerts */
+    color: #00d4ff;
+    /* Electric Blue Text */
+}
+
+/* Client Card */
+.card {
+    width: 320px;
+    background-color: #0e1c36;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 20px rgba(255, 221, 87, 0.3);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Card Titles */
+.card-title {
+    color: #ffd700;
+    /* Gold for Card Titles */
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-text {
+    color: #f8f9fa;
+    /* Light color for text */
+    text-align: left;
+}
+
+/* View Profile Button */
+.btn-primary {
+    background-color: #004aad;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ffd700;
+    color: #052146;
+}
+
+/* Footer */
+.footer {
+    background-color: #001f3f;
+    /* Dark Navy Footer */
+    color: #f1f1f1;
+    padding: 50px 3%;
+    text-align: left;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Footer Container with Flex */
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Footer Column for Flex Divs */
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    max-width: 280px;
+    margin: 10px;
+}
+
+/* Heading Styles */
+.footer-column h3 {
+    font-size: 20px;
+    color: #00d4ff;
+    /* Electric Blue for Headings */
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Flex for Links */
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Link Styles */
+.footer-link {
+    color: rgb(180, 180, 180);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #00d4ff;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

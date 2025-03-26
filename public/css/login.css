@@ -3,33 +3,44 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #1a002a;
+    background: url('/images/bg-image.jpg') no-repeat center center fixed;
+    /* Add Background Image */
+    background-size: cover;
+    /* Cover entire screen */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-/* Container */
+/* Main Container */
 .container {
     display: flex;
-    width: 900px;
-    height: 500px;
-    background: linear-gradient(135deg, #330033, #150015);
+    width: 1000px;
+    height: 600px;
+    background: rgba(0, 0, 0, 0.85);
+    /* Semi-transparent Dark Overlay */
     border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
 }
 
-/* Left Side - Welcome Section */
+/* Left Section - Welcome Section */
 .welcome-section {
-    width: 50%;
+    width: 55%;
     padding: 50px;
+    background: rgba(0, 31, 63, 0.9);
+    /* Dark Blue with slight transparency */
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
     color: white;
 }
 
 .welcome-section h1 {
     font-size: 36px;
     margin-bottom: 10px;
+    color: #00d4ff;
+    /* Electric Blue */
 }
 
 .welcome-section p {
@@ -38,33 +49,39 @@ body {
     margin-bottom: 20px;
 }
 
+/* Learn Button */
 .learn-btn {
-    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    background: linear-gradient(90deg, #00d4ff, #003092);
+    /* SureConnect Button Gradient */
     padding: 10px 20px;
     color: white;
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s ease-in-out;
 }
 
 .learn-btn:hover {
-    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+    background: linear-gradient(90deg, #003092, #00d4ff);
 }
 
-/* Right Side - Login Section */
+/* Right Section - Login Section */
 .login-section {
-    width: 50%;
+    width: 45%;
     padding: 50px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 39, 77, 0.9);
+    /* Slightly Darker Blue */
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     color: white;
 }
 
+/* Form Header */
 .login-section h2 {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 20px;
+    color: #00d4ff;
+    /* Electric Blue */
 }
 
 /* Form Styles */
@@ -73,39 +90,46 @@ form {
     flex-direction: column;
 }
 
+/* Label Styles */
 label {
     font-size: 14px;
     margin-bottom: 5px;
+    color: #b3b3b3;
 }
 
+/* Input Styles */
 input {
     padding: 12px;
     margin-bottom: 20px;
     border: none;
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #001f3f;
+    /* Dark Blue Input */
     color: white;
     outline: none;
 }
 
+/* Placeholder Color */
 input::placeholder {
     color: #ccc;
 }
 
 /* Submit Button */
 .submit-btn {
-    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    width: 100%;
+    background: linear-gradient(90deg, #00d4ff, #003092);
+    /* SureConnect Button */
     padding: 12px;
     border: none;
     border-radius: 20px;
     color: white;
+    font-size: 16px;
     cursor: pointer;
-    font-size: 14px;
-    transition: 0.3s;
+    transition: background 0.3s ease-in-out;
 }
 
 .submit-btn:hover {
-    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+    background: linear-gradient(90deg, #003092, #00d4ff);
 }
 
 /* Social Icons */
@@ -117,11 +141,37 @@ input::placeholder {
 }
 
 .social-icons a {
-    color: white;
+    color: #00d4ff;
+    /* Social Icon Color */
     font-size: 18px;
     transition: 0.3s;
 }
 
 .social-icons a:hover {
     color: #ff4b2b;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        width: 90%;
+    }
+
+    .welcome-section,
+    .login-section {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .welcome-section {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+    .login-section {
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
 }
