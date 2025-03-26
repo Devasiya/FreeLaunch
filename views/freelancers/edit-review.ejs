@@ -5,20 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Review</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/freelancerCss/edit-review.css"> <!-- Update the path as necessary -->
 </head>
 
 <body>
     <div class="container mt-4">
-        <h1>Edit Review</h1>
+        <h1 class="text-center">Edit Review</h1>
 
         <!-- Flash Messages -->
-        <% if (error) { %>
+        <% if (error && typeof error==="string" && error.trim() !=="" ) { %>
             <div class="alert alert-danger">
                 <%= error %>
             </div>
             <% } %>
-                <% if (success) { %>
+
+                <% if (success && typeof success==="string" && success.trim() !=="" ) { %>
                     <div class="alert alert-success">
                         <%= success %>
                     </div>
@@ -41,7 +43,8 @@
                                 <textarea id="comment" name="comment" class="form-control" rows="4"
                                     required><%= review.comment %></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Update Review</button>
+                            <button type="submit" class="btn btn-success">Update Review</button>
+                            <a href="/api/freelancers/<%= freelancerId %>/reviews" class="btn btn-secondary">Cancel</a>
                         </form>
     </div>
 </body>

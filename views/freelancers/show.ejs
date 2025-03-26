@@ -5,100 +5,191 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <%= title %>
+        <%= freelancer.firstName %>
+            <%= freelancer.lastName %> - Profile
     </title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/freelancerCss/show.css"> <!-- Update the path as necessary -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="container mt-4">
-        <h1 class="text-center">
-            <%= freelancer.firstName %>
-                <%= freelancer.lastName %>
-        </h1>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">SureConnect</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/auth/login" class="btn login-btn">Login</a></li>
+        </ul>
+    </nav>
 
-        <div class="row">
-            <div class="col-md-4">
-                <!-- Profile Photo -->
-                <% if (freelancer.profilePhoto) { %>
-                    <img src="<%= freelancer.profilePhoto %>" alt="Profile Photo" class="img-fluid rounded-circle"
-                        width="200" height="200">
-                    <% } else { %>
-                        <img src="/images/default-profile.png" alt="Default Profile" class="img-fluid rounded-circle"
-                            width="200" height="200">
-                        <% } %>
+    <div class="container">
+        <div class="profile-card">
+            <!-- Left Section with Profile Photo -->
+            <div class="profile-left">
+                <div class="profile-box">
+                    <% if (freelancer.profilePhoto) { %>
+                        <img src="<%= freelancer.profilePhoto %>" alt="Profile" class="profile-img">
+                        <% } else { %>
+                            <p class="text-muted">No Profile Photo</p>
+                            <% } %>
+                </div>
             </div>
-            <div class="col-md-8">
-                <h3>Contact Information</h3>
+
+            <!-- Right Section with Freelancer Details -->
+            <div class="profile-right">
+                <h2>
+                    <%= freelancer.firstName %>
+                        <%= freelancer.lastName %>
+                </h2>
+                <p class="profession">
+                    <%= freelancer.category || "N/A" %>
+                </p>
                 <p><strong>Email:</strong>
                     <%= freelancer.email %>
                 </p>
-                <p><strong>Phone Number:</strong>
+                <p><strong>Phone:</strong>
                     <%= freelancer.phoneNumber || "N/A" %>
-                </p>
-                <p><strong>Location:</strong>
-                    <%= freelancer.location.city || "N/A" %>, <%= freelancer.location.state || "N/A" %>, <%=
-                                freelancer.location.country || "N/A" %>
-                </p>
-
-                <h3>Professional Details</h3>
-                <p><strong>Experience:</strong>
-                    <%= freelancer.experience || "N/A" %>
                 </p>
                 <p><strong>Description:</strong>
                     <%= freelancer.description || "N/A" %>
                 </p>
                 <p><strong>Skills:</strong>
                     <%= freelancer.skills.join(', ') || "N/A" %></p>
+
+                <!-- Buttons -->
+                <a href="/api/freelancers/<%= freelancer._id %>/edit" class="btn btn-edit">Edit</a>
+                <form action="/api/freelancers/<%= freelancer._id %>?_method=DELETE" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm(' Are you sure?');">
+                        Delete</button>
+                        </form>
+                        <a href="/api/freelancers/<%= freelancer._id %>/projects" class="btn btn-view">View Projects</a>
+                        <a href="/api/freelancers/<%= freelancer._id %>/reviews" class="btn btn-view">View Reviews</a>
             </div>
         </div>
 
-        <div class="mt-4">
-            <a href="/api/freelancers/<%= freelancer._id %>/edit" class="btn btn-warning">Edit</a>
-            <form action="/api/freelancers/<%= freelancer._id %>?_method=DELETE" method="POST" style="display:inline;">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-            <a href="/api/freelancers/<%= freelancer._id %>/projects" class="btn btn-primary mt-3">View Projects</a>
-            <a href="/api/freelancers/<%= freelancer._id %>/reviews" class="btn btn-secondary btn-sm">See Reviews</a>
-            <a href="/api/freelancers" class="btn btn-secondary">Back to Freelancers</a>
+        <!-- Projects Section -->
+        <div class="section">
+            <h3>Projects</h3>
+            <% if (freelancer.projects.length===0) { %>
+                <p class="text-muted">No projects available.</p>
+                <% } else { %>
+                    <ul class="list-group">
+                        <% freelancer.projects.forEach(project=> { %>
+                            <li class="list-group-item">
+                                <strong>
+                                    <%= project.title %>
+                                </strong> - <%= project.description || "No description available" %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } %>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="section">
+            <h3>Reviews</h3>
+            <% if (freelancer.reviews.length===0) { %>
+                <p class="text-muted">No reviews yet.</p>
+                <% } else { %>
+                    <ul class="list-group">
+                        <% freelancer.reviews.forEach(review=> { %>
+                            <li class="list-group-item">
+                                <strong>Rating:</strong>
+                                <%= review.rating %>/5 <br>
+                                    <%= review.comment || "No comment provided" %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } %>
         </div>
     </div>
 
-    <!-- Projects Section -->
-    <div class="mt-4">
-        <h3>Projects</h3>
-        <% if (freelancer.projects.length===0) { %>
-            <p class="text-muted">No projects available.</p>
-            <% } else { %>
-                <ul class="list-group">
-                    <% freelancer.projects.forEach(project=> { %>
-                        <li class="list-group-item">
-                            <strong>
-                                <%= project.title %>
-                            </strong> - <%= project.description || "No description available" %>
-                        </li>
-                        <% }) %>
-                </ul>
-                <% } %>
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-container">
+            <div class=" footer-column">
+                <h3>Categories</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Graphics & Design</a>
+                    <a href="#" class="footer-link">Digital Marketing</a>
+                    <a href="#" class="footer-link">Writing & Translation</a>
+                    <a href="#" class="footer-link">Video & Animation</a>
+                    <a href="#" class="footer-link">Music & Audio</a>
+                    <a href="#" class="footer-link">Programming & Tech</a>
+                    <a href="#" class="footer-link">AI Services</a>
+                    <a href="#" class="footer-link">Consulting</a>
+                    <a href="#" class="footer-link">Data</a>
+                    <a href="#" class="footer-link">Business</a>
+                    <a href="#" class="footer-link">Personal Growth & Hobbies</a>
+                    <a href="#" class="footer-link">Photography</a>
+                    <a href="#" class="footer-link">Finance</a>
+                    <a href="#" class="footer-link">End-to-End Projects</a>
+                    <a href="#" class="footer-link">Service Catalog</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>For Clients</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">How SureConnect Works</a>
+                    <a href="#" class="footer-link">Customer Success Stories</a>
+                    <a href="#" class="footer-link">Trust & Safety</a>
+                    <a href="#" class="footer-link">Quality Guide</a>
+                    <a href="#" class="footer-link">SureConnect Learn</a>
+                    <a href="#" class="footer-link">SureConnect Guides</a>
+                    <a href="#" class="footer-link">SureConnect Answers</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>For Freelancers</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Become a SureConnect Freelancer</a>
+                    <a href="#" class="footer-link">Become an Agency</a>
+                    <a href="#" class="footer-link">Freelancer Equity Program</a>
+                    <a href="#" class="footer-link">Kickstart</a>
+                    <a href="#" class="footer-link">Community Hub</a>
+                    <a href="#" class="footer-link">Forum</a>
+                    <a href="#" class="footer-link">Events</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Business Solutions</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">SureConnect Pro</a>
+                    <a href="#" class="footer-link">Project Management Service</a>
+                    <a href="#" class="footer-link">ClearVoice</a>
+                    <a href="#" class="footer-link">Working Not Working</a>
+                    <a href="#" class="footer-link">AutoDS</a>
+                    <a href="#" class="footer-link">SureConnect Logo Maker</a>
+                    <a href="#" class="footer-link">Contact Sales</a>
+                    <a href="#" class="footer-link">SureConnect Go</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Company</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">About SureConnect</a>
+                    <a href="#" class="footer-link">Help & Support</a>
+                    <a href="#" class="footer-link">Social Impact</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Do not sell or share my info</a>
+                    <a href="#" class="footer-link">Partnerships</a>
+                    <a href="#" class="footer-link">Creator Network</a>
+                    <a href="#" class="footer-link">Affiliates</a>
+                    <a href="#" class="footer-link">Invite a Friend</a>
+                    <a href="#" class="footer-link">Press & News</a>
+                    <a href="#" class="footer-link">Investor Relations</a>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Reviews Section
-    <div class="mt-4">
-        <h3>Reviews</h3>
-        <% if (freelancer.reviews.length===0) { %>
-            <p class="text-muted">No reviews yet.</p>
-            <% } else { %>
-                <ul class="list-group">
-                    <% freelancer.reviews.forEach(review=> { %>
-                        <li class="list-group-item">
-                            <strong>Rating:</strong>
-                            <%= review.rating %>/5 <br>
-                                <%= review.comment || "No comment provided" %>
-                        </li>
-                        <% }) %>
-                </ul>
-                <% } %>
-    </div> -->
-
 </body>
+
 </html>

@@ -7,7 +7,7 @@
     <title>
         <%= freelancer.firstName %>'s Projects
     </title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/freelancerCss/projects.css">
 </head>
 
 <body>
@@ -17,12 +17,13 @@
         </h1>
 
         <!-- Flash Messages -->
-        <% if (error) { %>
+        <% if (error && typeof error==="string" && error.trim() !=="" ) { %>
             <div class="alert alert-danger">
                 <%= error %>
             </div>
             <% } %>
-                <% if (success) { %>
+
+                <% if (success && typeof success==="string" && success.trim() !=="" ) { %>
                     <div class="alert alert-success">
                         <%= success %>
                     </div>

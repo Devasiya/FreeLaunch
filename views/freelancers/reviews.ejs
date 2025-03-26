@@ -8,7 +8,7 @@
         <%= freelancer.firstName %>
             <%= freelancer.lastName %> - Reviews
     </title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/freelancerCss/reviews.css">
 </head>
 
 <body>
@@ -19,62 +19,72 @@
         </h1>
 
         <!-- Flash Messages -->
-        <% if (error) { %>
+        <% if (error && typeof error==="string" && error.trim() !=="" ) { %>
             <div class="alert alert-danger">
                 <%= error %>
             </div>
             <% } %>
-                <% if (success) { %>
+
+                <% if (success && typeof success==="string" && success.trim() !=="" ) { %>
                     <div class="alert alert-success">
                         <%= success %>
                     </div>
                     <% } %>
 
-                        <% if (reviews.length===0) { %>
-                            <p>No reviews yet.</p>
-                            <% } else { %>
-                                <ul class="list-group">
-                                    <% reviews.forEach(review=> { %>
-                                        <li class="list-group-item">
-                                            <strong>Rating: <%= review.rating %></strong>
-                                            <p>
-                                                <%= review.comment %>
-                                            </p>
-                                            <small>Reviewed by: <%= review.reviewerModel %></small>
-                                            <div class="float-right">
-                                                <a href="/api/freelancers/<%= freelancer._id %>/reviews/<%= review._id %>/edit"
-                                                    class="btn btn-warning btn-sm">Edit</a>
-                                                <form
-                                                    action="/api/freelancers/<%= freelancer._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                                    method="POST" style="display:inline;">
-                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                                </form>
-                                            </div>
-                                        </li>
-                                        <% }) %>
-                                </ul>
-                                <% } %>
+                        <!-- Reviews Section -->
+                        <div class="reviews-container">
+                            <h3>All Reviews</h3>
+                            <% if (reviews.length===0) { %>
+                                <p>No reviews yet.</p>
+                                <% } else { %>
+                                    <ul class="review-list">
+                                        <% reviews.forEach(review=> { %>
+                                            <li class="review-item">
+                                                <strong>Rating: <%= review.rating %> Stars ⭐</strong>
+                                                <p>
+                                                    <%= review.comment %>
+                                                </p>
+                                                <small>Reviewed by: <%= review.reviewer.username || "Anonymous" %>
+                                                </small>
+                                                <div class="float-right">
+                                                    <a href="/api/freelancers/<%= freelancer._id %>/reviews/<%= review._id %>/edit"
+                                                        class="btn btn-warning btn-sm">Edit</a>
+                                                    <form
+                                                        action="/api/freelancers/<%= freelancer._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                                        method="POST" style="display:inline;">
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                            <% }) %>
+                                    </ul>
+                                    <% } %>
+                        </div>
 
-                                    <h3>Submit a Review</h3>
-                                    <form action="/api/freelancers/<%= freelancer._id %>/reviews" method="POST">
-                                        <div class="form-group">
-                                            <label for="rating">Rating:</label>
-                                            <select id="rating" name="rating" class="form-control" required>
-                                                <option value="">Select a rating</option>
-                                                <option value="1">1 Star</option>
-                                                <option value="2">2 Stars</option>
-                                                <option value="3">3 Stars</option>
-                                                <option value="4">4 Stars</option>
-                                                <option value="5">5 Stars</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="comment">Comment:</label>
-                                            <textarea id="comment" name="comment" class="form-control" rows="4"
-                                                required></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit Review</button>
-                                    </form>
+                        <!-- Submit Review Section -->
+                        <div class="review-form-container">
+                            <h3>Submit a Review</h3>
+                            <form action="/api/freelancers/<%= freelancer._id %>/reviews" method="POST">
+                                <div class="form-group">
+                                    <label for="rating">Rating:</label>
+                                    <select id="rating" name="rating" class="form-control" required>
+                                        <option value="">Select a rating</option>
+                                        <option value="1">1 Star</option>
+                                        <option value="2">2 Stars</option>
+                                        <option value="3">3 Stars</option>
+                                        <option value="4">4 Stars</option>
+                                        <option value="5">5 Stars</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment">Comment:</label>
+                                    <textarea id="comment" name="comment" class="form-control" rows="4"
+                                        required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                            </form>
+                        </div>
     </div>
 </body>
 

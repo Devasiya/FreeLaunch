@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Freelancer</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/freelancerCss/edit.css"> <!-- Update the path as necessary -->
 </head>
 
 <body>
     <div class="container mt-4">
-        <h1>Edit Freelancer</h1>
+        <h1 class="text-center">Edit Freelancer</h1>
         <form action="/api/freelancers/<%= freelancer._id %>?_method=PUT" method="POST">
             <div class="form-group">
                 <label for="firstName">First Name:</label>
@@ -94,7 +95,7 @@
                     value="<%= freelancer.skills.join(', ') %>">
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Freelancer</button>
+            <button type="submit" class="btn btn-success">Update Freelancer</button>
             <a href="/api/freelancers/<%= freelancer._id %>" class="btn btn-secondary">Cancel</a>
         </form>
     </div>

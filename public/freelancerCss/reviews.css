@@ -1,0 +1,168 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #001f3f, #004aad);
+    /* Gradient */
+    color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Container */
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: rgba(0, 0, 0, 0.8);
+    /* Transparent Dark */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #00d4ff;
+    /* Blue Accent */
+    margin-bottom: 30px;
+}
+
+/* Flash Messages */
+.alert {
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background-color: rgba(0, 255, 0, 0.2);
+    color: #28a745;
+}
+
+.alert-danger {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #dc3545;
+}
+
+/* Review Section */
+.reviews-container,
+.review-form-container {
+    background: rgba(14, 28, 54, 0.9);
+    /* Deep Navy */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-bottom: 25px;
+}
+
+/* Review List */
+.review-list {
+    list-style: none;
+    padding: 0;
+}
+
+.review-item {
+    background-color: #0e1c36;
+    border: 1px solid #004aad;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    color: #f8f9fa;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect */
+.review-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+}
+
+/* Review Content */
+.review-item strong {
+    color: #ffd700;
+    /* Gold for rating */
+}
+
+.review-item p {
+    margin: 10px 0;
+    color: #f8f9fa;
+}
+
+.review-item small {
+    color: #00d4ff;
+    /* Blue for reviewer info */
+    font-style: italic;
+}
+
+/* Form Container */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+    color: #00d4ff;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Select, Input, and Textarea */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #004aad;
+    border-radius: 8px;
+    background-color: #0e1c36;
+    color: #f8f9fa;
+}
+
+/* Submit Button */
+.btn-primary {
+    background: linear-gradient(135deg, #00d4ff, #007bff);
+    /* Blue Gradient */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button Hover */
+.btn-primary:hover {
+    background: linear-gradient(135deg, #00c6ff, #0056b3);
+    /* Darker Blue */
+    color: #fff;
+}
+
+/* Edit and Delete Buttons */
+.btn-warning {
+    background: linear-gradient(135deg, #ffcc00, #ff9900);
+    color: #001f3f;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ff4e50, #ff0000);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        margin: 20px auto;
+    }
+}
