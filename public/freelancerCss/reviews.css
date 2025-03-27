@@ -62,6 +62,7 @@ h1 {
 }
 
 .review-item {
+    position: relative;
     background-color: #0e1c36;
     border: 1px solid #004aad;
     padding: 15px;
@@ -116,6 +117,14 @@ label {
     border-radius: 8px;
     background-color: #0e1c36;
     color: #f8f9fa;
+}
+
+.float-right {
+    right: 0;
+    left: auto;
+    position: absolute;
+    padding: 15px;
+    bottom: 0;
 }
 
 /* Submit Button */

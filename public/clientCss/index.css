@@ -9,14 +9,14 @@ body {
 
 /* Navbar */
 .navbar {
-    background: #001f3f;
+    background: #0047ab !important;
     /* Dark Blue Background for Navbar */
 }
 
 .navbar-brand {
     font-size: 24px;
     font-weight: bold;
-    color: #00d4ff;
+    color: #f8f9fa;
     /* Electric Blue for Navbar brand */
 }
 
@@ -33,6 +33,11 @@ body {
 .nav-link:hover {
     color: #00d4ff;
     /* Electric Blue on hover */
+}
+
+.symbol {
+    height: 30px;
+    width: 30px;
 }
 
 /* Flash Messages */
@@ -162,4 +167,9 @@ body {
         width: 100%;
         margin-bottom: 20px;
     }
+}
+
+.text-center.text-primary {
+    color: white !important;
+    /* font-weight: bold; */
 }
