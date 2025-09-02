@@ -7,6 +7,32 @@ body {
     /* Light text color to contrast with dark background */
 }
 
+.logo-img {
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    top: 11px;
+    position: absolute;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    left: 100px;
+    width: 300px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.logo-txt {
+    margin-left: 59px;
+    padding: 0;
+
+}
+
 /* Navbar */
 .navbar {
     background: #0047ab !important;
@@ -14,7 +40,7 @@ body {
 }
 
 .navbar-brand {
-    font-size: 24px;
+    font-size: 15px;
     font-weight: bold;
     color: #f8f9fa;
     /* Electric Blue for Navbar brand */
