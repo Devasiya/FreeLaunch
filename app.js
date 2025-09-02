@@ -31,7 +31,7 @@ const agreementRoutes = require("./routes/agreementsRoutes.js");
 const transactionRoutes = require('./routes/transactionRoutes');
 
 // Connect to MongoDB
-const dbUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/sureConnect";
+const dbUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/freelaunch";
 mongoose.connect(dbUrl)
     .then(() => console.log("Connected to DB"))
     .catch(err => console.log("DB Connection Error:", err));

@@ -23,4 +23,11 @@ contract PaymentSystem {
     function getBalance() public view returns (uint256) {
         return balances[msg.sender];
     }
+    function transfer(address recipient, uint256 amount) public {
+        require(balances[msg.sender] >= amount, "Insufficient balance");
+        balances[msg.sender] -= amount;
+        balances[recipient] += amount;
+        emit PaymentMade(msg.sender, recipient, amount);
+    }
+
 }
