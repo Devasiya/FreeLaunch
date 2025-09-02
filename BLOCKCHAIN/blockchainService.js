@@ -12,7 +12,7 @@ const contractABI = JSON.parse(
   fs.readFileSync(path.join(__dirname, "artifacts/contracts/Agreement.sol/Agreement.json"))
 ).abi;
 // Load deployed contract address from JSON file
-const deployedAddressPath = path.join(process.cwd(), "deployedAddress.json");
+const deployedAddressPath = path.join(process.cwd(),"BLOCKCHAIN", "deployedAddress.json");
 const deployedAddressJson = JSON.parse(fs.readFileSync(deployedAddressPath, "utf8"));
 const contractAddress = deployedAddressJson.address;
 
