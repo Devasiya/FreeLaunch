@@ -113,23 +113,7 @@
                     <% } %>
         </div>
 
-        <!-- Reviews Section -->
-        <div class="section">
-            <h3>Reviews</h3>
-            <% if (client.reviews.length===0) { %>
-                <p class="text-muted">No reviews yet.</p>
-                <% } else { %>
-                    <ul class="list-group">
-                        <% client.reviews.forEach(review=> { %>
-                            <li class="list-group-item">
-                                <strong>Rating:</strong>
-                                <%= review.rating %>/5 <br>
-                                    <%= review.comment || "No comment provided" %>
-                            </li>
-                            <% }) %>
-                    </ul>
-                    <% } %>
-        </div>
+        
     </div>
 
     <!-- Footer -->

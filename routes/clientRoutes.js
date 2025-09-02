@@ -23,7 +23,7 @@ router.get("/:id", async (req, res) => {
     try {
         console.log("🔹 Requested Client ID:", req.params.id); // Debugging
 
-        const client = await Client.findById(req.params.id);
+        const client = await Client.findById(req.params.id).populate('projects');
         if (!client) {
             console.log(" Client Not Found"); // Debugging
             req.flash("error", "Client not found");
