@@ -97,8 +97,9 @@
                         <% freelancer.reviews.forEach(review=> { %>
                             <li class="list-group-item">
                                 <strong>Rating:</strong>
-                                <%= review.rating %>/5 <br>
-                                    <%= review.comment || "No comment provided" %>
+                                <%= review.rating %>5 <br>
+                                   <%= review.comment && review.comment.trim() !== '' ? review.comment : "No comment provided" %>
+
                             </li>
                             <% }) %>
                     </ul>

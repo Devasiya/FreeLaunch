@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
 // Single freelancer
 router.get("/:id", async (req, res) => {
     try {
-        const freelancer = await Freelancer.findById(req.params.id).populate("projects");
+        const freelancer = await Freelancer.findById(req.params.id).populate("projects").populate("reviews");
         if (!freelancer) {
             req.flash("error", "Freelancer not found");
             return res.redirect("/api/freelancers");
@@ -255,30 +255,22 @@ router.delete('/:id/projects/:projectId', async (req, res) => {
 
 //REVIEWS 
 router.get('/:id/reviews', async (req, res) => {
-    try {
-        const freelancerId = req.params.id;
-
-        // Find the freelancer and populate the reviews
-        const freelancer = await Freelancer.findById(freelancerId).populate({
-            path: 'reviews',
-            populate: {
-                path: 'reviewer', // Populate the reviewer field
-                model: 'client' // Adjust this to the correct model name for your clients
-            }
-        });
-
-        if (!freelancer) {
-            req.flash('error', 'Freelancer not found');
-            return res.redirect(`/api/freelancers`);
-        }
-
-        // Render the reviews page with the freelancer's reviews
-        res.render('freelancers/reviews', { freelancer, reviews: freelancer.reviews });
-    } catch (error) {
-        console.error('Error fetching reviews:', error);
-        req.flash('error', 'Error fetching reviews');
-        res.redirect(`/api/freelancers`);
+  try {
+    const freelancerId = req.params.id;
+    const freelancer = await Freelancer.findById(freelancerId).populate({
+      path: 'reviews',
+      populate: { path: 'reviewer' }  // Mongoose uses refPath here
+    });
+    if (!freelancer) {
+      req.flash('error', 'Freelancer not found');
+      return res.redirect('/api/freelancers');
     }
+    res.render('freelancers/reviews', { freelancer, reviews: freelancer.reviews });
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    req.flash('error', 'Error fetching reviews');
+    res.redirect('/api/freelancers');
+  }
 });
 
 // POST route to create a new review for a freelancer
